@@ -27,9 +27,9 @@
   overflow: hidden;
 
   padding:
-    clamp(74px, 7vw, 132px)
-    clamp(16px, 3.2vw, 64px)
-    clamp(86px, 7.5vw, 144px);
+    clamp(74px, 6vw, 112px)
+    clamp(16px, 2.7vw, 54px)
+    clamp(86px, 6.4vw, 122px);
 
   background-repeat: no-repeat;
   background-position: center 30%;
@@ -54,7 +54,7 @@
 }
 
 .rinkcards-section__inner {
-  width: min(100%, 1580px);
+  width: min(100%, 1320px);
   margin: 0 auto;
 }
 
@@ -63,7 +63,7 @@
   flex-direction: column;
   align-items: center;
 
-  margin: 0 0 clamp(30px, 3.8vw, 56px);
+  margin: 0 0 clamp(30px, 3.3vw, 48px);
 
   text-align: center;
 }
@@ -78,7 +78,7 @@
     "Bebas Neue",
     Impact,
     sans-serif;
-  font-size: clamp(2.3rem, 4.15vw, 4.8rem);
+  font-size: clamp(2.3rem, 3.6vw, 4.1rem);
   font-weight: 400;
   letter-spacing: 0.055em;
   line-height: 0.98;
@@ -110,13 +110,13 @@
   min-width: 0;
 
   padding:
-    clamp(46px, 5vw, 76px)
-    clamp(68px, 6.5vw, 112px);
+    clamp(40px, 4.3vw, 64px)
+    clamp(56px, 5.6vw, 94px);
 
   overflow: hidden;
 
   border: 2px solid rgba(255, 255, 255, 0.94);
-  border-radius: clamp(72px, 9vw, 150px);
+  border-radius: clamp(60px, 7.7vw, 128px);
 
   background:
     radial-gradient(
@@ -223,9 +223,9 @@
 
   display: grid;
   grid-template-columns: repeat(12, minmax(0, 1fr));
-  grid-template-rows: repeat(2, minmax(180px, 1fr));
+  grid-template-rows: repeat(2, minmax(160px, 1fr));
 
-  gap: clamp(10px, 0.9vw, 16px);
+  gap: clamp(10px, 0.8vw, 14px);
 
   width: 100%;
   min-width: 0;
@@ -264,7 +264,7 @@
   grid-column: 1 / span 4;
   grid-row: 1 / span 2;
 
-  min-height: clamp(420px, 34vw, 560px);
+  min-height: clamp(380px, 29vw, 480px);
 }
 
 .rink-card--billing {
@@ -346,28 +346,28 @@
   align-items: flex-start;
 
   padding:
-    clamp(20px, 2vw, 30px)
-    clamp(20px, 2.1vw, 32px);
+    clamp(20px, 1.7vw, 26px)
+    clamp(20px, 1.8vw, 27px);
 }
 
 .rink-card--crossbar .rink-card__content {
   padding:
-    clamp(26px, 2.6vw, 40px)
-    clamp(26px, 2.6vw, 40px);
+    clamp(26px, 2.2vw, 34px)
+    clamp(26px, 2.2vw, 34px);
 }
 
 .rink-card--programs .rink-card__content,
 .rink-card--directions .rink-card__content {
   padding:
-    clamp(16px, 1.4vw, 22px)
-    clamp(14px, 1.35vw, 20px);
+    clamp(16px, 1.2vw, 19px)
+    clamp(14px, 1.15vw, 17px);
 }
 
 .rink-card__title-row {
   display: flex;
   align-items: center;
 
-  gap: clamp(7px, 0.7vw, 10px);
+  gap: clamp(7px, 0.6vw, 9px);
 
   min-width: 0;
 }
@@ -382,7 +382,7 @@
     "Bebas Neue",
     Impact,
     sans-serif;
-  font-size: clamp(1.65rem, 2vw, 2.6rem);
+  font-size: clamp(1.6rem, 1.7vw, 2.2rem);
   font-weight: 400;
   letter-spacing: 0.035em;
   line-height: 0.98;
@@ -394,12 +394,12 @@
 }
 
 .rink-card--crossbar .rink-card__title {
-  font-size: clamp(2.2rem, 2.75vw, 3.5rem);
+  font-size: clamp(2.1rem, 2.35vw, 3rem);
 }
 
 .rink-card--programs .rink-card__title,
 .rink-card--directions .rink-card__title {
-  font-size: clamp(1.35rem, 1.45vw, 1.95rem);
+  font-size: clamp(1.3rem, 1.25vw, 1.7rem);
 }
 
 .rink-card__arrow {
@@ -407,8 +407,8 @@
   align-items: center;
   justify-content: center;
 
-  width: clamp(16px, 1.1vw, 21px);
-  height: clamp(16px, 1.1vw, 21px);
+  width: clamp(16px, 0.95vw, 19px);
+  height: clamp(16px, 0.95vw, 19px);
 
   flex: 0 0 auto;
 
@@ -426,12 +426,12 @@
 .rink-card__description {
   max-width: 94%;
 
-  margin-top: clamp(10px, 1vw, 14px);
+  margin-top: clamp(10px, 0.85vw, 12px);
 
   color: rgba(255, 255, 255, 0.9);
 
   font-family: "Montserrat", sans-serif;
-  font-size: clamp(0.76rem, 0.78vw, 0.98rem);
+  font-size: clamp(0.75rem, 0.68vw, 0.88rem);
   font-weight: 500;
   line-height: 1.55;
 
@@ -442,7 +442,7 @@
 .rink-card--directions .rink-card__description {
   max-width: 100%;
 
-  font-size: clamp(0.69rem, 0.66vw, 0.82rem);
+  font-size: clamp(0.68rem, 0.58vw, 0.74rem);
 }
 
 .rink-card__rule {
@@ -734,10 +734,10 @@
 --------------------------------------------------------- */
 
 .footer-socials {
-  grid-column: 1;
+  grid-column: 2;
   grid-row: 2;
 
-  align-self: start;
+  align-self: center;
 
   display: flex;
   align-items: center;
@@ -925,11 +925,11 @@
 
   display: grid;
   grid-template-columns:
+    minmax(320px, 0.9fr)
     minmax(0, 1fr)
-    minmax(300px, 0.75fr)
-    minmax(280px, 0.8fr);
+    minmax(300px, 0.75fr);
   grid-template-rows: auto auto;
-  column-gap: clamp(32px, 4vw, 64px);
+  column-gap: clamp(24px, 3vw, 48px);
   row-gap: 32px;
   align-items: start;
 
@@ -937,7 +937,7 @@
 }
 
 .footer-menu {
-  grid-column: 1;
+  grid-column: 2;
   grid-row: 1;
 
   min-width: 0;
@@ -1037,33 +1037,12 @@
   }
 
   .site-footer__main {
-    grid-template-columns: minmax(0, 1fr) 420px 380px;
-    column-gap: clamp(32px, 3.5vw, 64px);
+    grid-template-columns: 430px minmax(0, 1fr) 420px;
+    column-gap: clamp(24px, 3vw, 48px);
   }
 
   .footer-menu__groups {
-    column-gap: clamp(50px, 4vw, 90px);
-  }
-
-  .footer-menu__column {
-    flex-direction: row;
-
-    gap: clamp(28px, 2.6vw, 44px);
-  }
-
-  .footer-menu__column .footer-menu__group {
-    flex: 1 1 0;
-  }
-
-  .footer-menu__group-title,
-  .footer-menu__group li a {
-    white-space: nowrap;
-  }
-
-  .footer-menu__group li a {
-    padding-right: 20px;
-
-    font-size: 0.76rem;
+    column-gap: clamp(28px, 2.6vw, 44px);
   }
 }
 
@@ -1195,7 +1174,7 @@ a.footer-menu__group-title:hover svg {
 
 /* Connect + map */
 .footer-connect {
-  grid-column: 2;
+  grid-column: 3;
   grid-row: 1 / span 2;
 
   padding: clamp(28px, 3vw, 40px);
@@ -1214,13 +1193,30 @@ a.footer-menu__group-title:hover svg {
   min-width: 0;
 }
 
-.footer-map-box {
-  grid-column: 3;
+.footer-map-block {
+  container-type: inline-size;
+
+  grid-column: 1;
   grid-row: 1 / span 2;
   align-self: center;
 
+  display: flex;
+  flex-direction: column;
+
+  gap: 40px;
+
   min-width: 0;
-  height: 300px;
+}
+
+@media (min-width: 1151px) {
+  .footer-map-block {
+    margin-top: -55px;
+  }
+}
+
+.footer-map-box {
+  min-width: 0;
+  height: 340px;
 
   position: relative;
 
@@ -1260,6 +1256,7 @@ a.footer-menu__group-title:hover svg {
 .footer-connect__card {
   display: flex;
   align-items: center;
+  justify-content: center;
 
   gap: 12px;
 
@@ -1305,14 +1302,23 @@ a.footer-menu__group-title:hover svg {
 
   min-width: 0;
 
-  text-align: left;
+  text-align: center;
+}
+
+.footer-connect__card-label-row {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  gap: 6px;
 }
 
 .footer-connect__card-label {
   color: rgba(255, 255, 255, 0.5);
 
   font-family: "Oswald", sans-serif;
-  font-size: 0.66rem;
+  font-size: 0.85rem;
   font-weight: 600;
   letter-spacing: 0.09em;
   line-height: 1;
@@ -1332,16 +1338,18 @@ a.footer-menu__group-title:hover svg {
 }
 
 .member-button {
+  align-self: center;
+
   display: flex;
   align-items: center;
   justify-content: center;
 
   gap: 15px;
 
-  width: 100%;
+  width: 68%;
   min-height: 48px;
 
-  margin-top: 22px;
+  margin-top: 0;
   padding: 14px 24px;
 
   border: 1px solid var(--footer-red);
@@ -1351,7 +1359,7 @@ a.footer-menu__group-title:hover svg {
   background: var(--footer-red);
 
   font-family: "Oswald", sans-serif;
-  font-size: 0.74rem;
+  font-size: clamp(0.8rem, 4cqw, 1.05rem);
   font-weight: 700;
   letter-spacing: 0.105em;
   line-height: 1;
@@ -1418,7 +1426,7 @@ a.footer-menu__group-title:hover svg {
 }
 
 /* Tablet */
-@media (max-width: 900px) {
+@media (max-width: 1150px) {
   .footer-container {
     width: min(calc(100% - 38px), 700px);
   }
@@ -1432,7 +1440,7 @@ a.footer-menu__group-title:hover svg {
 
   .footer-menu,
   .footer-connect,
-  .footer-map-box,
+  .footer-map-block,
   .footer-socials {
     grid-column: auto;
   }
@@ -1445,9 +1453,11 @@ a.footer-menu__group-title:hover svg {
     grid-row: 2;
   }
 
-  .footer-map-box {
+  .footer-map-block {
     grid-row: 3;
+  }
 
+  .footer-map-box {
     height: 240px;
   }
 
@@ -1473,7 +1483,7 @@ a.footer-menu__group-title:hover svg {
   }
 
   .member-button {
-    width: 78%;
+    width: 60%;
     margin-left: auto;
     margin-right: auto;
   }
@@ -1519,10 +1529,6 @@ a.footer-menu__group-title:hover svg {
     text-align: center;
     font-size: 0.72rem;
     line-height: 1.2;
-  }
-
-  .footer-connect__info {
-    text-align: center;
   }
 
   .footer-socials {

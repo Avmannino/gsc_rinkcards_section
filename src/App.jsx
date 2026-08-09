@@ -516,11 +516,13 @@ function ConnectPanel() {
             href={`${SITE_BASE_URL}/directions`}
             target="_top"
           >
-            <FooterPinIcon />
-
             <span className="footer-connect__card-text">
-              <span className="footer-connect__card-label">
-                Address
+              <span className="footer-connect__card-label-row">
+                <FooterPinIcon />
+
+                <span className="footer-connect__card-label">
+                  Address
+                </span>
               </span>
 
               <span className="footer-connect__card-value">
@@ -535,11 +537,13 @@ function ConnectPanel() {
             className="footer-connect__card"
             href={`tel:${GSC_PHONE_NUMBER.replace(/[^\d+]/g, "")}`}
           >
-            <FooterPhoneIcon />
-
             <span className="footer-connect__card-text">
-              <span className="footer-connect__card-label">
-                Phone
+              <span className="footer-connect__card-label-row">
+                <FooterPhoneIcon />
+
+                <span className="footer-connect__card-label">
+                  Phone
+                </span>
               </span>
 
               <span className="footer-connect__card-value">
@@ -553,28 +557,19 @@ function ConnectPanel() {
           className="footer-connect__card footer-connect__card--wide"
           href={`mailto:${ADMISSIONS_EMAIL}`}
         >
-          <FooterEmailIcon />
-
           <span className="footer-connect__card-text">
-            <span className="footer-connect__card-label">
-              Email
+            <span className="footer-connect__card-label-row">
+              <FooterEmailIcon />
+
+              <span className="footer-connect__card-label">
+                Email
+              </span>
             </span>
 
             <span className="footer-connect__card-value">
               {ADMISSIONS_EMAIL}
             </span>
           </span>
-        </a>
-
-        <a
-          className="member-button"
-          href={MEMBER_LOGIN_URL}
-          target="_blank"
-          rel="noreferrer"
-        >
-          <span>Member Login</span>
-
-          <FooterArrowIcon />
         </a>
       </div>
     </section>
@@ -583,13 +578,26 @@ function ConnectPanel() {
 
 function FooterMap() {
   return (
-    <div className="footer-map-box">
-      <iframe
-        title="Greenwich Skating Club location"
-        src="https://www.google.com/maps?q=Greenwich+Skating+Club,+Cardinal+Road,+Greenwich,+CT&output=embed"
-        loading="lazy"
-        referrerPolicy="no-referrer-when-downgrade"
-      />
+    <div className="footer-map-block">
+      <div className="footer-map-box">
+        <iframe
+          title="Greenwich Skating Club location"
+          src="https://www.google.com/maps?q=Greenwich+Skating+Club,+Cardinal+Road,+Greenwich,+CT&output=embed"
+          loading="lazy"
+          referrerPolicy="no-referrer-when-downgrade"
+        />
+      </div>
+
+      <a
+        className="member-button"
+        href={MEMBER_LOGIN_URL}
+        target="_blank"
+        rel="noreferrer"
+      >
+        <span>Member Login</span>
+
+        <FooterArrowIcon />
+      </a>
     </div>
   );
 }
