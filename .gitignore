@@ -25,3 +25,6 @@ dist-ssr
 
 # WSL/Windows download artifacts
 *:Zone.Identifier
+
+# Local Claude Code settings
+.claude/
