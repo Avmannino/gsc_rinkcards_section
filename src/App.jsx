@@ -10,9 +10,6 @@ const MEMBER_LOGIN_URL =
 const ADMISSIONS_EMAIL =
   "gscadmissions@greenwichskatingclub.org";
 
-const GSC_PHONE_NUMBER = "(203) 622-9583";
-
-const MOBILE_LOGO_SRC = `${import.meta.env.BASE_URL}gsc-logo-mobile.png`;
 const CENTER_ICE_LOGO_SRC = `${import.meta.env.BASE_URL}gsc-logo.png`;
 const RINKCARD_IMAGE_BASE = `${import.meta.env.BASE_URL}rinkcards/`;
 const RINKCARDS_BACKGROUND_SRC = `${import.meta.env.BASE_URL}gsc-background.jpg`;
@@ -68,28 +65,11 @@ const navigationLinks = [
   },
 ];
 
-const socialLinks = [
-  {
-    label: "Facebook",
-    href: "https://www.facebook.com/thegreenwichskatingclub/",
-    icon: "facebook",
-  },
-  {
-    label: "Instagram",
-    href: "https://www.instagram.com/thegreenwichskatingclub",
-    icon: "instagram",
-  },
-];
-
 const exploreGroups = [
   {
-    title: "About",
+    title: "About GSC",
     href: `${SITE_BASE_URL}/about-gsc`,
     links: [
-      {
-        label: "About The Club",
-        href: `${SITE_BASE_URL}/about-gsc`,
-      },
       {
         label: "Club History",
         href: `${SITE_BASE_URL}/club-history`,
@@ -115,6 +95,10 @@ const exploreGroups = [
       {
         label: "Proposing a Candidate",
         href: `${SITE_BASE_URL}/proposing-a-candidate`,
+      },
+      {
+        label: "Change of Status",
+        href: `${SITE_BASE_URL}/change-of-status`,
       },
     ],
   },
@@ -293,29 +277,19 @@ function RinkCardsSection() {
   );
 }
 
-function FooterArrowIcon() {
+function ArrowIcon() {
   return (
     <svg
       viewBox="0 0 24 24"
       aria-hidden="true"
     >
-      <path d="m9 5 7 7-7 7" />
+      <path d="M5 12h14" />
+      <path d="m14 7 5 5-5 5" />
     </svg>
   );
 }
 
-function FooterPhoneIcon() {
-  return (
-    <svg
-      viewBox="0 0 24 24"
-      aria-hidden="true"
-    >
-      <path d="M6.6 10.8c1.4 2.8 3.8 5.2 6.6 6.6l2.2-2.2c.3-.3.7-.4 1.1-.3 1.2.4 2.5.6 3.8.6.6 0 1 .4 1 1v3.6c0 .6-.4 1-1 1C10.6 21.1 2.9 13.4 2.9 3.7c0-.6.4-1 1-1h3.6c.6 0 1 .4 1 1 0 1.3.2 2.6.6 3.8.1.4 0 .8-.3 1.1L6.6 10.8Z" />
-    </svg>
-  );
-}
-
-function FooterEmailIcon() {
+function EmailIcon() {
   return (
     <svg
       viewBox="0 0 24 24"
@@ -334,7 +308,7 @@ function FooterEmailIcon() {
   );
 }
 
-function FooterPinIcon() {
+function PinIcon() {
   return (
     <svg
       viewBox="0 0 24 24"
@@ -351,29 +325,10 @@ function FooterPinIcon() {
   );
 }
 
-function FacebookIcon() {
-  return (
-    <svg
-      className="footer-socials__icon-svg"
-      viewBox="0 0 24 24"
-      fill="currentColor"
-      aria-hidden="true"
-    >
-      <path d="M22 12a10 10 0 1 0-11.5 9.95v-7.04H7.9V12h2.6V9.8c0-2.57 1.53-4 3.87-4 1.12 0 2.3.2 2.3.2v2.53h-1.3c-1.28 0-1.68.8-1.68 1.62V12h2.86l-.46 2.91h-2.4v7.04A10 10 0 0 0 22 12Z" />
-    </svg>
-  );
-}
-
 function InstagramIcon() {
   return (
     <svg
-      className="footer-socials__icon-svg"
       viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="1.8"
-      strokeLinecap="round"
-      strokeLinejoin="round"
       aria-hidden="true"
     >
       <rect
@@ -383,122 +338,77 @@ function InstagramIcon() {
         height="18"
         rx="5"
       />
-      <circle cx="12" cy="12" r="4.2" />
+
       <circle
-        cx="17.4"
-        cy="6.6"
-        r="0.9"
-        fill="currentColor"
-        stroke="none"
+        cx="12"
+        cy="12"
+        r="4"
+      />
+
+      <circle
+        className="icon-fill"
+        cx="17.5"
+        cy="6.5"
+        r="1"
       />
     </svg>
   );
 }
 
-const socialIcons = {
-  facebook: FacebookIcon,
-  instagram: InstagramIcon,
-};
-
-function FooterMenuGroup({ group }) {
+function FooterLogo() {
   return (
-    <div className="footer-menu__group">
-      {group.title === "Programs" ? (
-        <a
-          className="footer-menu__group-title"
-          href={group.href}
-          target="_top"
-        >
-          <span>{group.title}</span>
-          <FooterArrowIcon />
-        </a>
-      ) : (
-        <div className="footer-menu__group-title">
-          <span>{group.title}</span>
-          <FooterArrowIcon />
-        </div>
-      )}
-
-      <ul>
-        {group.links.map((link) => (
-          <li key={link.label}>
-            <a
-              href={link.href}
-              target="_top"
-            >
-              <span>{link.label}</span>
-              <FooterArrowIcon />
-            </a>
-          </li>
-        ))}
-      </ul>
-    </div>
-  );
-}
-
-function FooterSocials() {
-  return (
-    <div className="footer-socials">
-      <span
-        className="footer-socials__rule"
-        aria-hidden="true"
+    <a
+      className="footer-logo"
+      href={`${SITE_BASE_URL}/`}
+      target="_top"
+      aria-label="Greenwich Skating Club home"
+    >
+      <img
+        src={CENTER_ICE_LOGO_SRC}
+        alt="Greenwich Skating Club"
       />
-
-      <span className="footer-socials__label">
-        Follow Us On
-      </span>
-
-      <nav
-        className="footer-socials__icons"
-        aria-label="Follow Greenwich Skating Club on social media"
-      >
-        {socialLinks.map((link) => {
-          const Icon = socialIcons[link.icon];
-
-          return (
-            <a
-              className={`footer-socials__icon footer-socials__icon--${link.icon}`}
-              href={link.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              key={link.label}
-              aria-label={`Follow us on ${link.label}`}
-            >
-              <Icon />
-            </a>
-          );
-        })}
-      </nav>
-
-      <span
-        className="footer-socials__rule"
-        aria-hidden="true"
-      />
-    </div>
+    </a>
   );
 }
 
 function ExploreMenu() {
-  const primaryGroups = exploreGroups.slice(0, 2);
-  const secondaryGroups = exploreGroups.slice(2);
-
   return (
     <nav
       className="footer-menu"
-      aria-label="Explore Greenwich Skating Club"
+      aria-label="Footer navigation"
     >
-      <div className="footer-menu__groups">
-        <div className="footer-menu__column">
-          {primaryGroups.map((group) => (
-            <FooterMenuGroup group={group} key={group.title} />
-          ))}
-        </div>
+      <h2>Explore</h2>
 
-        <div className="footer-menu__column">
-          {secondaryGroups.map((group) => (
-            <FooterMenuGroup group={group} key={group.title} />
-          ))}
-        </div>
+      <div className="footer-menu__groups">
+        {exploreGroups.map((group) => (
+          <div
+            className="footer-menu__group"
+            key={group.title}
+          >
+            <a
+              className="footer-menu__group-title"
+              href={group.href}
+              target="_top"
+            >
+              <span>{group.title}</span>
+
+              <ArrowIcon />
+            </a>
+
+            <ul>
+              {group.links.map((link) => (
+                <li key={link.label}>
+                  <a
+                    href={link.href}
+                    target="_top"
+                  >
+                    {link.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
       </div>
     </nav>
   );
@@ -506,80 +416,67 @@ function ExploreMenu() {
 
 function ConnectPanel() {
   return (
-    <section className="footer-connect">
-      <h2>Get In Touch</h2>
-
+    <section
+      className="footer-connect"
+      aria-labelledby="connect-title"
+    >
       <div className="footer-connect__info">
-        <div className="footer-connect__cards">
+        <h2 id="connect-title">
+          Connect
+        </h2>
+
+        <p>
+          Questions about joining Greenwich Skating
+          Club or visiting the rink?
+        </p>
+
+        <div className="footer-connect__details">
           <a
-            className="footer-connect__card"
             href={`${SITE_BASE_URL}/directions`}
             target="_top"
           >
-            <span className="footer-connect__card-text">
-              <span className="footer-connect__card-label-row">
-                <FooterPinIcon />
+            <PinIcon />
 
-                <span className="footer-connect__card-label">
-                  Address
-                </span>
-              </span>
-
-              <span className="footer-connect__card-value">
-                9 Cardinal Rd.
-                <br />
-                Greenwich, CT 06830
-              </span>
+            <span>
+              Cardinal Road · Greenwich, Connecticut
             </span>
           </a>
 
-          <a
-            className="footer-connect__card"
-            href={`tel:${GSC_PHONE_NUMBER.replace(/[^\d+]/g, "")}`}
-          >
-            <span className="footer-connect__card-text">
-              <span className="footer-connect__card-label-row">
-                <FooterPhoneIcon />
+          <a href={`mailto:${ADMISSIONS_EMAIL}`}>
+            <EmailIcon />
 
-                <span className="footer-connect__card-label">
-                  Phone
-                </span>
-              </span>
-
-              <span className="footer-connect__card-value">
-                {GSC_PHONE_NUMBER}
-              </span>
+            <span>
+              {ADMISSIONS_EMAIL}
             </span>
           </a>
         </div>
 
         <a
-          className="footer-connect__card footer-connect__card--wide"
-          href={`mailto:${ADMISSIONS_EMAIL}`}
+          className="member-button"
+          href={MEMBER_LOGIN_URL}
+          target="_blank"
+          rel="noreferrer"
         >
-          <span className="footer-connect__card-text">
-            <span className="footer-connect__card-label-row">
-              <FooterEmailIcon />
+          <span>Member Login</span>
 
-              <span className="footer-connect__card-label">
-                Email
-              </span>
-            </span>
+          <ArrowIcon />
+        </a>
 
-            <span className="footer-connect__card-value">
-              {ADMISSIONS_EMAIL}
-            </span>
+        <a
+          className="instagram-link"
+          href="https://www.instagram.com/thegreenwichskatingclub/"
+          target="_blank"
+          rel="noreferrer"
+        >
+          <InstagramIcon />
+
+          <span>
+            Follow GSC on Instagram
           </span>
         </a>
       </div>
-    </section>
-  );
-}
 
-function FooterMap() {
-  return (
-    <div className="footer-map-block">
-      <div className="footer-map-box">
+      <div className="footer-map">
         <iframe
           title="Greenwich Skating Club location"
           src="https://www.google.com/maps?q=Greenwich+Skating+Club,+Cardinal+Road,+Greenwich,+CT&output=embed"
@@ -587,18 +484,7 @@ function FooterMap() {
           referrerPolicy="no-referrer-when-downgrade"
         />
       </div>
-
-      <a
-        className="member-button"
-        href={MEMBER_LOGIN_URL}
-        target="_blank"
-        rel="noreferrer"
-      >
-        <span>Member Login</span>
-
-        <FooterArrowIcon />
-      </a>
-    </div>
+    </section>
   );
 }
 
@@ -608,13 +494,6 @@ function SiteFooter() {
 
   return (
     <footer className="site-footer">
-      <img
-        className="site-footer__watermark"
-        src={MOBILE_LOGO_SRC}
-        alt=""
-        aria-hidden="true"
-      />
-
       <div
         className="site-footer__accent"
         aria-hidden="true"
@@ -623,28 +502,30 @@ function SiteFooter() {
         <span />
       </div>
 
-      <div className="footer-container">
-        <div className="site-footer__main">
-          <ExploreMenu />
+      <div
+        className="site-footer__rings"
+        aria-hidden="true"
+      />
 
-          <FooterSocials />
+      <div className="footer-container site-footer__main">
+        <section
+          className="footer-brand"
+          aria-label="Greenwich Skating Club"
+        >
+          <FooterLogo />
+        </section>
 
-          <ConnectPanel />
+        <ExploreMenu />
 
-          <FooterMap />
-        </div>
+        <ConnectPanel />
       </div>
 
       <div className="site-footer__bottom">
-        <img
-          className="footer-logo"
-          src={MOBILE_LOGO_SRC}
-          alt="Greenwich Skating Club"
-        />
-
-        <p className="site-footer__copyright">
-          © {currentYear} Greenwich Skating Club
-        </p>
+        <div className="footer-container site-footer__bottom-inner">
+          <p>
+            © {currentYear} Greenwich Skating Club
+          </p>
+        </div>
       </div>
     </footer>
   );
