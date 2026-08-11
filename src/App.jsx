@@ -10,6 +10,8 @@ const MEMBER_LOGIN_URL =
 const ADMISSIONS_EMAIL =
   "gscadmissions@greenwichskatingclub.org";
 
+const GSC_PHONE_NUMBER = "(203) 622-9583";
+
 const CENTER_ICE_LOGO_SRC = `${import.meta.env.BASE_URL}gsc-logo.png`;
 const RINKCARD_IMAGE_BASE = `${import.meta.env.BASE_URL}rinkcards/`;
 const RINKCARDS_BACKGROUND_SRC = `${import.meta.env.BASE_URL}gsc-background.jpg`;
@@ -67,9 +69,12 @@ const navigationLinks = [
 
 const exploreGroups = [
   {
-    title: "About GSC",
-    href: `${SITE_BASE_URL}/about-gsc`,
+    title: "About",
     links: [
+      {
+        label: "About GSC",
+        href: `${SITE_BASE_URL}/about-gsc`,
+      },
       {
         label: "Club History",
         href: `${SITE_BASE_URL}/club-history`,
@@ -86,7 +91,6 @@ const exploreGroups = [
   },
   {
     title: "Membership",
-    href: `${SITE_BASE_URL}/membership`,
     links: [
       {
         label: "Admissions Process",
@@ -96,7 +100,6 @@ const exploreGroups = [
   },
   {
     title: "Programs",
-    href: `${SITE_BASE_URL}/programs`,
     links: [
       {
         label: "Learn to Skate",
@@ -126,7 +129,6 @@ const exploreGroups = [
   },
   {
     title: "Contact",
-    href: `${SITE_BASE_URL}/contact`,
     links: [
       {
         label: "Map & Directions",
@@ -275,8 +277,7 @@ function ArrowIcon() {
       viewBox="0 0 24 24"
       aria-hidden="true"
     >
-      <path d="M5 12h14" />
-      <path d="m14 7 5 5-5 5" />
+      <path d="m9 5 7 7-7 7" />
     </svg>
   );
 }
@@ -296,6 +297,17 @@ function EmailIcon() {
       />
 
       <path d="m4 7 8 6 8-6" />
+    </svg>
+  );
+}
+
+function PhoneIcon() {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      aria-hidden="true"
+    >
+      <path d="M6.6 10.8c1.4 2.8 3.8 5.2 6.6 6.6l2.2-2.2c.3-.3.7-.4 1.1-.3 1.2.4 2.5.6 3.8.6.6 0 1 .4 1 1v3.6c0 .6-.4 1-1 1C10.6 21.1 2.9 13.4 2.9 3.7c0-.6.4-1 1-1h3.6c.6 0 1 .4 1 1 0 1.3.2 2.6.6 3.8.1.4 0 .8-.3 1.1L6.6 10.8Z" />
     </svg>
   );
 }
@@ -377,15 +389,9 @@ function ExploreMenu() {
             className="footer-menu__group"
             key={group.title}
           >
-            <a
-              className="footer-menu__group-title"
-              href={group.href}
-              target="_top"
-            >
+            <div className="footer-menu__group-title">
               <span>{group.title}</span>
-
-              <ArrowIcon />
-            </a>
+            </div>
 
             <ul>
               {group.links.map((link) => (
@@ -394,7 +400,9 @@ function ExploreMenu() {
                     href={link.href}
                     target="_top"
                   >
-                    {link.label}
+                    <span>{link.label}</span>
+
+                    <ArrowIcon />
                   </a>
                 </li>
               ))}
@@ -439,6 +447,14 @@ function ConnectPanel() {
 
             <span>
               {ADMISSIONS_EMAIL}
+            </span>
+          </a>
+
+          <a href={`tel:${GSC_PHONE_NUMBER.replace(/[^\d+]/g, "")}`}>
+            <PhoneIcon />
+
+            <span>
+              Phone: {GSC_PHONE_NUMBER}
             </span>
           </a>
         </div>

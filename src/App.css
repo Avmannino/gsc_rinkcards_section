@@ -923,9 +923,6 @@
 .footer-menu__group-title {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-
-  gap: 12px;
 
   padding-bottom: 11px;
   margin-bottom: 9px;
@@ -944,12 +941,6 @@
   letter-spacing: 0.05em;
   line-height: 1;
   text-transform: uppercase;
-
-  text-decoration: none;
-
-  transition:
-    color 180ms ease,
-    padding-left 180ms ease;
 }
 
 .footer-menu__group ul {
@@ -973,32 +964,30 @@
   stroke-linejoin: round;
 }
 
-.footer-menu__group-title svg {
+.footer-menu__group li a svg {
   color: var(--footer-red);
 
-  opacity: 0;
+  opacity: 1;
 
-  transform: translateX(-6px);
+  transform: translateX(0);
 
   transition:
     opacity 180ms ease,
     transform 180ms ease;
 }
 
-.footer-menu__group-title:hover {
-  padding-left: 4px;
-
-  color: var(--footer-red);
-}
-
-.footer-menu__group-title:hover svg {
+.footer-menu__group li a:hover svg {
   opacity: 1;
 
-  transform: translateX(0);
+  transform: translateX(4px);
 }
 
 .footer-menu__group li a {
-  display: block;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 8px;
 
   padding: 7px 0;
 
@@ -1378,12 +1367,12 @@
     justify-content: center;
   }
 
-  .footer-menu__group-title svg {
+  .footer-menu__group li a svg {
     display: none;
   }
 
   .footer-menu__group li a {
-    text-align: center;
+    justify-content: center;
   }
 
   .footer-connect {
