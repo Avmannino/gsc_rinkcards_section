@@ -89,16 +89,8 @@ const exploreGroups = [
     href: `${SITE_BASE_URL}/membership`,
     links: [
       {
-        label: "Prospective Members",
-        href: `${SITE_BASE_URL}/prospective-members`,
-      },
-      {
-        label: "Proposing a Candidate",
-        href: `${SITE_BASE_URL}/proposing-a-candidate`,
-      },
-      {
-        label: "Change of Status",
-        href: `${SITE_BASE_URL}/change-of-status`,
+        label: "Admissions Process",
+        href: `${SITE_BASE_URL}/admissions-process`,
       },
     ],
   },
