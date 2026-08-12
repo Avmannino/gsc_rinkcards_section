@@ -58,6 +58,26 @@
   margin: 0 auto;
 }
 
+.rinkcards-rink-wrap {
+  position: relative;
+}
+
+.rinkcards-scoreboard {
+  position: absolute;
+  top: 50%;
+  left: calc(100% - 42px);
+  z-index: 1;
+
+  width: clamp(110px, 9vw, 170px);
+  height: auto;
+
+  transform: translateY(-50%);
+
+  filter: drop-shadow(0 14px 26px rgba(0, 0, 0, 0.4));
+
+  pointer-events: none;
+}
+
 .rinkcards-heading {
   display: flex;
   flex-direction: column;
@@ -399,7 +419,11 @@
 
 .rink-card--programs .rink-card__title,
 .rink-card--directions .rink-card__title {
-  font-size: clamp(1.3rem, 1.25vw, 1.7rem);
+  overflow: hidden;
+
+  font-size: clamp(1.2rem, 1.1vw, 1.4rem);
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 .rink-card__arrow {
@@ -441,6 +465,7 @@
 .rink-card--programs .rink-card__description,
 .rink-card--directions .rink-card__description {
   max-width: 100%;
+  min-height: 3.1em;
 
   font-size: clamp(0.68rem, 0.58vw, 0.74rem);
 }
@@ -518,6 +543,7 @@
   .rink-card--programs .rink-card__title,
   .rink-card--directions .rink-card__title {
     font-size: clamp(1.65rem, 3vw, 2.4rem);
+    white-space: normal;
   }
 
   .rink-card--programs .rink-card__description,
@@ -599,6 +625,10 @@
       58px
       10px
       72px;
+  }
+
+  .rinkcards-scoreboard {
+    display: none;
   }
 
   .rinkcards-heading h1 {

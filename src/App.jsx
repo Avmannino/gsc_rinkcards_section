@@ -13,13 +13,14 @@ const ADMISSIONS_EMAIL =
 const GSC_PHONE_NUMBER = "(203) 622-9583";
 
 const CENTER_ICE_LOGO_SRC = `${import.meta.env.BASE_URL}gsc-logo.png`;
+const SCOREBOARD_IMAGE_SRC = `${import.meta.env.BASE_URL}scoreboard.png`;
 const RINKCARD_IMAGE_BASE = `${import.meta.env.BASE_URL}rinkcards/`;
 const RINKCARDS_BACKGROUND_SRC = `${import.meta.env.BASE_URL}gsc-background.jpg`;
 
 const navigationLinks = [
   {
     title: "Programs",
-    description: "See what’s happening on the ice.",
+    description: "See what’s happening on the ice",
     href: `${SITE_BASE_URL}/programs`,
     image: `${RINKCARD_IMAGE_BASE}programs.jpg`,
     position: "65% center",
@@ -27,7 +28,7 @@ const navigationLinks = [
   },
   {
     title: "Crossbar Login",
-    description: "Log in to the GSC Crossbar Portal.",
+    description: "Log in to the GSC Crossbar Portal",
     href: "https://www.greenwichskatingclub.org/login",
     image: `${RINKCARD_IMAGE_BASE}crossbar-login.png`,
     position: "center center",
@@ -35,7 +36,7 @@ const navigationLinks = [
   },
   {
     title: "Membership",
-    description: "Learn about memberships.",
+    description: "Learn about memberships",
     href: `${SITE_BASE_URL}/membership`,
     image: `${RINKCARD_IMAGE_BASE}membership.jpg`,
     position: "center 100%",
@@ -43,7 +44,7 @@ const navigationLinks = [
   },
   {
     title: "Member Billing",
-    description: "Manage your membership billing.",
+    description: "Manage your membership billing",
     href: "https://members.greenwichskatingclub.org/",
     image: `${RINKCARD_IMAGE_BASE}member-billing.jpg`,
     position: "center center",
@@ -51,7 +52,7 @@ const navigationLinks = [
   },
   {
     title: "Contact Us",
-    description: "Get in touch with us.",
+    description: "Get in touch with us",
     href: `${SITE_BASE_URL}/contact`,
     image: `${RINKCARD_IMAGE_BASE}contact.png`,
     position: "35% center",
@@ -59,7 +60,7 @@ const navigationLinks = [
   },
   {
     title: "Directions",
-    description: "Get directions to the club.",
+    description: "How to find us",
     href: `${SITE_BASE_URL}/directions`,
     image: `${RINKCARD_IMAGE_BASE}directions.jpg`,
     position: "center center",
@@ -254,17 +255,26 @@ function RinkCardsSection() {
           <span aria-hidden="true" />
         </header>
 
-        <div className="rinkcards-rink">
-          <RinkMarkings />
+        <div className="rinkcards-rink-wrap">
+          <img
+            className="rinkcards-scoreboard"
+            src={SCOREBOARD_IMAGE_SRC}
+            alt=""
+            aria-hidden="true"
+          />
 
-          <nav
-            className="rinkcards-grid"
-            aria-label="Greenwich Skating Club pages"
-          >
-            {navigationLinks.map((link) => (
-              <RinkCard key={link.title} link={link} />
-            ))}
-          </nav>
+          <div className="rinkcards-rink">
+            <RinkMarkings />
+
+            <nav
+              className="rinkcards-grid"
+              aria-label="Greenwich Skating Club pages"
+            >
+              {navigationLinks.map((link) => (
+                <RinkCard key={link.title} link={link} />
+              ))}
+            </nav>
+          </div>
         </div>
       </div>
     </section>
