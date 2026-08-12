@@ -250,7 +250,7 @@ function RinkCardsSection() {
 
       <div className="rinkcards-section__inner">
         <header className="rinkcards-heading">
-          <h1 id="rinkcards-section-title">Around The Rink</h1>
+          <h1 id="rinkcards-section-title">Rinkside Guide</h1>
           <span aria-hidden="true" />
         </header>
 
