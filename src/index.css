@@ -4,27 +4,27 @@
   box-sizing: border-box;
 }
 
-html {
+html,
+body,
+#root {
   width: 100%;
-  min-width: 320px;
-
+  min-width: 0;
+  min-height: 0;
+  height: auto;
   margin: 0;
   padding: 0;
-  overflow-x: clip;
+}
 
+html {
+  min-width: 320px;
+  overflow-x: clip;
   background: #e9ebee;
   scroll-behavior: smooth;
 }
 
 body {
-  width: 100%;
   min-width: 320px;
-  min-height: 100vh;
-
-  margin: 0;
-  padding: 0;
   overflow-x: clip;
-
   color: #102652;
 
   background:
@@ -51,6 +51,11 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+#root {
+  display: block;
+  overflow-x: clip;
+}
+
 body,
 button,
 input,
@@ -64,6 +69,7 @@ picture,
 video,
 canvas,
 svg {
+  display: block;
   max-width: 100%;
 }
 
@@ -74,9 +80,4 @@ a {
 button,
 a {
   -webkit-tap-highlight-color: transparent;
-}
-
-#root {
-  width: 100%;
-  min-height: 100%;
 }

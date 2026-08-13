@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@400;500;600;700;800&display=swap");
+
 :root {
   --gsc-navy: #102652;
   --gsc-navy-dark: #071b3b;
@@ -24,6 +26,9 @@
   isolation: isolate;
 
   width: 100%;
+  min-width: 0;
+  min-height: 0;
+  height: auto;
   overflow: hidden;
 
   padding:
@@ -777,6 +782,9 @@
   position: relative;
 
   width: 100%;
+  min-width: 0;
+  min-height: 0;
+  height: auto;
 
   overflow: hidden;
   isolation: isolate;
