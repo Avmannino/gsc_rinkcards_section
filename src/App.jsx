@@ -9,9 +9,6 @@ import "./App.css";
 const SITE_BASE_URL =
   "https://wingsarenact.wixstudio.com/gscnewsite";
 
-const PROGRAM_BASE_URL =
-  "https://www.greenwichskatingclub.com";
-
 const MEMBER_LOGIN_URL =
   "https://www.greenwichskatingclub.org/login";
 
@@ -95,7 +92,7 @@ const programLinks = [
   {
     title: "Learn to Skate",
     description: "Learn more about Learn to Skate",
-    href: `${PROGRAM_BASE_URL}/learn-to-skate`,
+    href: `${SITE_BASE_URL}/learn-to-skate`,
     image: `${RINKCARD_IMAGE_BASE}learn-to-skate.jpg`,
     position: "center center",
     layout: "program-item",
@@ -103,7 +100,7 @@ const programLinks = [
   {
     title: "Mini Mites",
     description: "Learn more about Mini Mites",
-    href: `${PROGRAM_BASE_URL}/mini-mites`,
+    href: `${SITE_BASE_URL}/mini-mites`,
     image: `${RINKCARD_IMAGE_BASE}mini-mites.jpg`,
     position: "center center",
     layout: "program-item",
@@ -111,7 +108,7 @@ const programLinks = [
   {
     title: "Youth Travel Hockey",
     description: "Learn more about Youth Travel Hockey",
-    href: `${PROGRAM_BASE_URL}/youth-travel-hockey`,
+    href: `${SITE_BASE_URL}/youth-travel-hockey`,
     image: `${RINKCARD_IMAGE_BASE}youth-travel-hockey.jpg`,
     position: "center center",
     layout: "program-item",
@@ -119,7 +116,7 @@ const programLinks = [
   {
     title: "Stateline Girls Hockey",
     description: "Learn more about Stateline Girls Hockey",
-    href: `${PROGRAM_BASE_URL}/stateline-girls-hockey`,
+    href: `${SITE_BASE_URL}/stateline-girls-hockey`,
     image: `${RINKCARD_IMAGE_BASE}stateline-girls-hockey.jpg`,
     position: "center center",
     layout: "program-item",
@@ -127,7 +124,7 @@ const programLinks = [
   {
     title: "Figure Skating",
     description: "Learn more about Figure Skating",
-    href: `${PROGRAM_BASE_URL}/figure-skating`,
+    href: `${SITE_BASE_URL}/figure-skating`,
     image: `${RINKCARD_IMAGE_BASE}figure-skating.jpg`,
     position: "center center",
     layout: "program-item",
@@ -135,7 +132,7 @@ const programLinks = [
   {
     title: "Adult Hockey",
     description: "Learn more about Adult Hockey",
-    href: `${PROGRAM_BASE_URL}/adult-hockey`,
+    href: `${SITE_BASE_URL}/adult-hockey`,
     image: `${RINKCARD_IMAGE_BASE}adult-hockey.jpeg`,
     position: "center center",
     layout: "program-item",
@@ -152,15 +149,15 @@ const exploreGroups = [
       },
       {
         label: "Club History",
-        href: `${SITE_BASE_URL}/club-history`,
+        href: `${SITE_BASE_URL}/history`,
       },
       {
         label: "Board of Governors",
-        href: `${SITE_BASE_URL}/board-of-governors`,
+        href: `${SITE_BASE_URL}/board`,
       },
       {
         label: "GSC Alumni",
-        href: `${SITE_BASE_URL}/gsc-alumni`,
+        href: `${SITE_BASE_URL}/alumni`,
       },
     ],
   },
@@ -169,7 +166,7 @@ const exploreGroups = [
     links: [
       {
         label: "Admissions Process",
-        href: `${SITE_BASE_URL}/admissions-process`,
+        href: `${SITE_BASE_URL}/admissions`,
       },
     ],
   },
@@ -211,7 +208,7 @@ const exploreGroups = [
       },
       {
         label: "Contact Form",
-        href: `${SITE_BASE_URL}/contact-form`,
+        href: `${SITE_BASE_URL}/contact`,
       },
     ],
   },
