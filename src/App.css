@@ -32,9 +32,7 @@
   overflow: hidden;
 
   padding:
-    clamp(74px, 6vw, 112px)
-    clamp(16px, 2.7vw, 54px)
-    clamp(86px, 6.4vw, 122px);
+    clamp(74px, 6vw, 112px) clamp(16px, 2.7vw, 54px) clamp(86px, 6.4vw, 122px);
 
   background-repeat: no-repeat;
   background-position: center 30%;
@@ -49,13 +47,11 @@
   pointer-events: none;
 
   background:
-    linear-gradient(
-      180deg,
+    linear-gradient(180deg,
       transparent 0%,
       transparent 62%,
       rgba(139, 183, 219, 0.04) 63%,
-      rgba(139, 183, 219, 0.02) 100%
-    );
+      rgba(139, 183, 219, 0.02) 100%);
 }
 
 .rinkcards-section__inner {
@@ -112,19 +108,17 @@
   text-shadow: 0 8px 22px rgba(0, 0, 0, 0.24);
 }
 
-.rinkcards-heading > span {
+.rinkcards-heading>span {
   width: 160px;
   height: 2px;
 
   margin-top: clamp(14px, 1.5vw, 20px);
 
-  background: linear-gradient(
-    90deg,
-    transparent 0%,
-    var(--gsc-red) 18%,
-    var(--gsc-red) 82%,
-    transparent 100%
-  );
+  background: linear-gradient(90deg,
+      transparent 0%,
+      var(--gsc-red) 18%,
+      var(--gsc-red) 82%,
+      transparent 100%);
 }
 
 .rinkcards-rink {
@@ -135,8 +129,7 @@
   min-width: 0;
 
   padding:
-    clamp(40px, 4.3vw, 64px)
-    clamp(56px, 5.6vw, 94px);
+    clamp(40px, 4.3vw, 64px) clamp(56px, 5.6vw, 94px);
 
   overflow: hidden;
 
@@ -144,23 +137,45 @@
   border-radius: clamp(60px, 7.7vw, 128px);
 
   background:
-    radial-gradient(
-      circle at 18% 12%,
+    radial-gradient(circle at 18% 12%,
       rgba(255, 255, 255, 0.96) 0%,
-      rgba(255, 255, 255, 0) 32%
-    ),
-    linear-gradient(
-      145deg,
+      rgba(255, 255, 255, 0) 32%),
+    linear-gradient(145deg,
       rgba(250, 252, 253, 0.99) 0%,
       rgba(237, 242, 247, 0.99) 52%,
-      rgba(223, 231, 239, 0.99) 100%
-    );
+      rgba(223, 231, 239, 0.99) 100%);
 
   box-shadow:
     0 34px 78px rgba(0, 0, 0, 0.36),
     0 7px 20px rgba(0, 0, 0, 0.2),
     inset 0 0 0 1px rgba(25, 57, 95, 0.22),
     inset 0 18px 38px rgba(255, 255, 255, 0.54);
+
+  transition:
+    height 720ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.rinkcards-rink--measuring {
+  transition: none !important;
+}
+
+/*
+ * High-resolution desktop:
+ * widen only the rink shell while preserving the exact card/grid width.
+ * The wrapper grows 120px total (60px per side), and the rink gains the
+ * same 60px of extra horizontal padding on each side. That keeps the
+ * content box — and therefore every card — exactly the same width.
+ */
+@media (min-width: 1500px) {
+  .rinkcards-rink-wrap {
+    width: calc(100% + 120px);
+    margin-left: -60px;
+  }
+
+  .rinkcards-rink {
+    padding-left: calc(clamp(56px, 5.6vw, 94px) + 60px);
+    padding-right: calc(clamp(56px, 5.6vw, 94px) + 60px);
+  }
 }
 
 .rinkcards-rink::before {
@@ -186,13 +201,11 @@
   pointer-events: none;
 
   background:
-    repeating-linear-gradient(
-      112deg,
+    repeating-linear-gradient(112deg,
       rgba(102, 126, 153, 0.022) 0,
       rgba(102, 126, 153, 0.022) 1px,
       transparent 1px,
-      transparent 8px
-    );
+      transparent 8px);
 }
 
 .rinkcards-rink__markings {
@@ -232,14 +245,39 @@
 }
 
 .rinkcards-rink__crease {
-  fill: rgba(61, 114, 180, 0.12);
+  fill: #5bc0ec;
+  fill-opacity: 0.78;
   stroke: var(--gsc-red);
   stroke-width: 0.65;
-  opacity: 0.15;
+  stroke-opacity: 0.42;
+  opacity: 1;
 }
 
 .rinkcards-rink__logo {
   opacity: 0.1;
+}
+
+/*
+ * Rink orientation:
+ * - 1000px and wider: normal landscape rink markings
+ * - 999px and narrower: portrait rink markings with HORIZONTAL lines
+ */
+.rinkcards-rink__markings--landscape {
+  display: block;
+}
+
+.rinkcards-rink__markings--portrait {
+  display: none;
+}
+
+@media (max-width: 999px) {
+  .rinkcards-rink__markings--landscape {
+    display: none;
+  }
+
+  .rinkcards-rink__markings--portrait {
+    display: block;
+  }
 }
 
 .rinkcards-grid {
@@ -272,6 +310,10 @@
   background: #0a1d38;
 
   text-decoration: none;
+  text-align: left;
+
+  -webkit-appearance: none;
+  appearance: none;
 
   box-shadow:
     0 14px 28px rgba(4, 20, 43, 0.2),
@@ -317,6 +359,98 @@
   grid-row: 2;
 }
 
+.rinkcards-grid--programs {
+  grid-template-rows: repeat(3, minmax(138px, 1fr));
+  grid-auto-flow: row dense;
+}
+
+.rinkcards-grid--programs .rink-card--crossbar {
+  grid-column: 1 / span 4;
+  grid-row: 1 / span 3;
+
+  min-height: clamp(500px, 34vw, 590px);
+}
+
+.rink-card--program-item {
+  grid-column: span 4;
+  grid-row: auto;
+
+  min-height: clamp(154px, 12vw, 188px);
+}
+
+.rink-card--button {
+  width: 100%;
+  padding: 0;
+
+  font: inherit;
+
+  cursor: pointer;
+}
+
+.rink-card--toggle-active {
+  border-color: rgba(229, 24, 55, 0.62);
+
+  animation: rinkToggleActivate 620ms cubic-bezier(0.22, 0.74, 0.28, 1);
+}
+
+.rink-card--toggle-active .rink-card__rule {
+  background: var(--gsc-red);
+}
+
+.rink-card--crossbar.rink-card--toggle-active .rink-card__title {
+  font-size: clamp(2.35rem, 2.83vw, 3.6rem);
+  white-space: nowrap;
+}
+
+@media (min-width: 1181px) {
+  .rink-card--toggle-active .rink-card__description {
+    margin-top: 4px;
+  }
+}
+
+.rink-card--toggle-active .rink-card__title-row {
+  flex-direction: column-reverse;
+  align-items: center;
+
+  gap: clamp(6px, 0.6vw, 10px);
+}
+
+.rink-card--toggle-active .rink-card__arrow--inline {
+  transform: translateX(-50px);
+}
+
+.rink-card--crossbar.rink-card--toggle-active:hover .rink-card__arrow--inline {
+  transform: translateX(-56px);
+}
+
+.rink-card--toggle-active .rink-card__arrow {
+  width: clamp(56px, 4vw, 76px);
+  height: clamp(56px, 4vw, 76px);
+}
+
+@keyframes rinkToggleActivate {
+  0% {
+    opacity: 0.82;
+    transform: scale(0.985);
+  }
+
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.rink-card--program-item .rink-card__title {
+  font-size: clamp(1.15rem, 1.25vw, 1.65rem);
+  line-height: 1.02;
+}
+
+@media (min-width: 1200px) {
+  .rink-card--program-item .rink-card__rule {
+    margin-top: 8px;
+  }
+}
+
 .rink-card__media,
 .rink-card__shade {
   position: absolute;
@@ -341,22 +475,18 @@
   z-index: -2;
 
   background:
-    linear-gradient(
-      180deg,
+    linear-gradient(180deg,
       rgba(3, 14, 31, 0.08) 0%,
       rgba(3, 14, 31, 0.22) 34%,
-      rgba(3, 14, 31, 0.86) 100%
-    );
+      rgba(3, 14, 31, 0.86) 100%);
 }
 
 .rink-card--crossbar .rink-card__shade {
   background:
-    linear-gradient(
-      180deg,
+    linear-gradient(180deg,
       rgba(3, 14, 31, 0.04) 0%,
       rgba(3, 14, 31, 0.2) 38%,
-      rgba(3, 14, 31, 0.92) 100%
-    );
+      rgba(3, 14, 31, 0.92) 100%);
 }
 
 .rink-card__content {
@@ -371,21 +501,18 @@
   align-items: flex-start;
 
   padding:
-    clamp(20px, 1.7vw, 26px)
-    clamp(20px, 1.8vw, 27px);
+    clamp(20px, 1.7vw, 26px) clamp(20px, 1.8vw, 27px);
 }
 
 .rink-card--crossbar .rink-card__content {
   padding:
-    clamp(26px, 2.2vw, 34px)
-    clamp(26px, 2.2vw, 34px);
+    clamp(26px, 2.2vw, 34px) clamp(26px, 2.2vw, 34px);
 }
 
 .rink-card--programs .rink-card__content,
 .rink-card--directions .rink-card__content {
   padding:
-    clamp(16px, 1.2vw, 19px)
-    clamp(14px, 1.15vw, 17px);
+    clamp(16px, 1.2vw, 19px) clamp(14px, 1.15vw, 17px);
 }
 
 .rink-card__title-row {
@@ -452,6 +579,15 @@
   height: 100%;
 }
 
+.rink-card__arrow-icon {
+  display: block;
+
+  width: 100%;
+  height: 100%;
+
+  object-fit: contain;
+}
+
 .rink-card__description {
   max-width: 94%;
 
@@ -485,6 +621,14 @@
   background: rgba(255, 255, 255, 0.36);
 }
 
+@media (min-width: 521px) {
+
+  .rink-card--programs .rink-card__rule,
+  .rink-card--directions .rink-card__rule {
+    margin-top: 6px;
+  }
+}
+
 .rink-card:hover {
   transform: translateY(-5px);
 
@@ -509,6 +653,44 @@
   outline-offset: 5px;
 }
 
+.rink-card--entrance {
+  animation: rinkCardSwapIn 500ms cubic-bezier(0.22, 0.74, 0.28, 1) backwards;
+  animation-delay: calc(var(--card-index, 0) * 65ms);
+}
+
+@keyframes rinkCardSwapIn {
+  0% {
+    opacity: 0;
+    transform: translateY(20px) scale(0.972);
+  }
+
+  38% {
+    opacity: 0.58;
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.sr-only {
+  position: absolute;
+
+  width: 1px;
+  height: 1px;
+
+  padding: 0;
+  margin: -1px;
+
+  overflow: hidden;
+
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+
+  border: 0;
+}
+
 /* Large tablet / small desktop */
 @media (max-width: 1180px) {
   .rinkcards-section {
@@ -518,8 +700,7 @@
 
   .rinkcards-rink {
     padding:
-      clamp(40px, 4vw, 54px)
-      clamp(42px, 5vw, 66px);
+      clamp(40px, 4vw, 54px) clamp(42px, 5vw, 66px);
 
     border-radius: clamp(58px, 8vw, 104px);
   }
@@ -535,7 +716,8 @@
   .rink-card--membership,
   .rink-card--contact,
   .rink-card--programs,
-  .rink-card--directions {
+  .rink-card--directions,
+  .rink-card--program-item {
     grid-column: auto;
     grid-row: auto;
     min-height: 230px;
@@ -546,7 +728,8 @@
   }
 
   .rink-card--programs .rink-card__title,
-  .rink-card--directions .rink-card__title {
+  .rink-card--directions .rink-card__title,
+  .rink-card--program-item .rink-card__title {
     font-size: clamp(1.65rem, 3vw, 2.4rem);
     white-space: normal;
   }
@@ -555,15 +738,37 @@
   .rink-card--directions .rink-card__description {
     font-size: clamp(0.76rem, 1.3vw, 0.94rem);
   }
+
+  .rinkcards-grid--programs {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-rows: none;
+    grid-auto-rows: minmax(230px, auto);
+  }
+
+  .rinkcards-grid--programs .rink-card--crossbar {
+    grid-column: 1 / -1;
+    grid-row: auto;
+
+    min-height: clamp(220px, 27vw, 300px);
+  }
+
+  .rinkcards-grid--programs .rink-card--program-item {
+    grid-column: auto;
+    grid-row: auto;
+
+    min-height: 230px;
+  }
+
+  .rink-card--program-item .rink-card__title {
+    font-size: clamp(1.45rem, 2.7vw, 2.1rem);
+  }
 }
 
 /* Tablet */
 @media (max-width: 760px) {
   .rinkcards-section {
     padding:
-      clamp(62px, 11vw, 86px)
-      14px
-      clamp(76px, 12vw, 100px);
+      clamp(62px, 11vw, 86px) 14px clamp(76px, 12vw, 100px);
   }
 
   .rinkcards-heading {
@@ -576,8 +781,7 @@
 
   .rinkcards-rink {
     padding:
-      clamp(30px, 6vw, 42px)
-      clamp(22px, 5vw, 34px);
+      clamp(30px, 6vw, 42px) clamp(22px, 5vw, 34px);
 
     border-radius: clamp(46px, 10vw, 76px);
   }
@@ -592,21 +796,24 @@
   .rink-card--membership,
   .rink-card--contact,
   .rink-card--programs,
-  .rink-card--directions {
+  .rink-card--directions,
+  .rink-card--program-item {
     min-height: 205px;
   }
 
   .rink-card__content,
   .rink-card--crossbar .rink-card__content,
   .rink-card--programs .rink-card__content,
-  .rink-card--directions .rink-card__content {
+  .rink-card--directions .rink-card__content,
+  .rink-card--program-item .rink-card__content {
     padding: 18px;
   }
 
   .rink-card__title,
   .rink-card--crossbar .rink-card__title,
   .rink-card--programs .rink-card__title,
-  .rink-card--directions .rink-card__title {
+  .rink-card--directions .rink-card__title,
+  .rink-card--program-item .rink-card__title {
     font-size: clamp(1.35rem, 4.3vw, 2rem);
   }
 
@@ -621,33 +828,42 @@
   .rink-card__rule {
     margin-top: 12px;
   }
+
+  .rinkcards-grid--programs .rink-card--crossbar {
+    min-height: clamp(205px, 34vw, 260px);
+  }
+
+  .rinkcards-grid--programs .rink-card--program-item {
+    min-height: 205px;
+  }
 }
 
 /* Mobile */
 @media (max-width: 520px) {
   .rinkcards-section {
     padding:
-      58px
-      10px
-      72px;
+      58px 10px 72px;
   }
 
   .rinkcards-scoreboard {
     display: none;
   }
 
+  .rink-card--toggle-active .rink-card__content {
+    transform: translate(20px, -15px);
+  }
+
   .rinkcards-heading h1 {
     font-size: clamp(2rem, 10vw, 2.9rem);
   }
 
-  .rinkcards-heading > span {
+  .rinkcards-heading>span {
     height: 2px;
   }
 
   .rinkcards-rink {
     padding:
-      28px
-      16px;
+      28px 16px;
 
     border-radius: clamp(38px, 13vw, 58px);
   }
@@ -668,21 +884,24 @@
   .rink-card--membership,
   .rink-card--contact,
   .rink-card--programs,
-  .rink-card--directions {
+  .rink-card--directions,
+  .rink-card--program-item {
     min-height: clamp(148px, 43vw, 186px);
   }
 
   .rink-card__content,
   .rink-card--crossbar .rink-card__content,
   .rink-card--programs .rink-card__content,
-  .rink-card--directions .rink-card__content {
+  .rink-card--directions .rink-card__content,
+  .rink-card--program-item .rink-card__content {
     padding: 14px;
   }
 
   .rink-card__title,
   .rink-card--crossbar .rink-card__title,
   .rink-card--programs .rink-card__title,
-  .rink-card--directions .rink-card__title {
+  .rink-card--directions .rink-card__title,
+  .rink-card--program-item .rink-card__title {
     font-size: clamp(1.02rem, 5vw, 1.48rem);
     line-height: 1.02;
   }
@@ -694,6 +913,20 @@
   .rink-card__rule {
     width: 34px;
     margin-top: 10px;
+  }
+
+  .rinkcards-grid--programs .rink-card--crossbar {
+    grid-column: 1 / -1;
+
+    min-height: clamp(165px, 46vw, 210px);
+  }
+
+  .rinkcards-grid--programs .rink-card--program-item {
+    min-height: clamp(148px, 43vw, 186px);
+  }
+
+  .rink-card--program-item .rink-card__title {
+    font-size: clamp(0.96rem, 4.7vw, 1.4rem);
   }
 
   .rinkcards-rink__goal-line,
@@ -725,30 +958,52 @@
   .rink-card--membership,
   .rink-card--contact,
   .rink-card--programs,
-  .rink-card--directions {
+  .rink-card--directions,
+  .rink-card--program-item {
     min-height: 142px;
   }
 
   .rink-card__content,
   .rink-card--crossbar .rink-card__content,
   .rink-card--programs .rink-card__content,
-  .rink-card--directions .rink-card__content {
+  .rink-card--directions .rink-card__content,
+  .rink-card--program-item .rink-card__content {
     padding: 12px;
   }
 
   .rink-card__title,
   .rink-card--crossbar .rink-card__title,
   .rink-card--programs .rink-card__title,
-  .rink-card--directions .rink-card__title {
+  .rink-card--directions .rink-card__title,
+  .rink-card--program-item .rink-card__title {
     font-size: 1rem;
+  }
+
+  .rinkcards-grid--programs .rink-card--crossbar {
+    min-height: 160px;
+  }
+
+  .rinkcards-grid--programs .rink-card--program-item {
+    min-height: 142px;
+  }
+
+  .rink-card--program-item .rink-card__title {
+    font-size: 0.92rem;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
+
+  .rinkcards-rink,
   .rink-card,
   .rink-card__media,
   .rink-card__arrow {
     transition: none;
+  }
+
+  .rink-card--toggle-active,
+  .rink-card--entrance {
+    animation: none;
   }
 
   .rink-card:hover {
@@ -794,16 +1049,12 @@
   font-family: "Montserrat", Arial, sans-serif;
 
   background:
-    radial-gradient(
-      circle at 9% 13%,
+    radial-gradient(circle at 9% 13%,
       rgba(34, 87, 151, 0.4),
-      transparent 30%
-    ),
-    linear-gradient(
-      112deg,
+      transparent 30%),
+    linear-gradient(112deg,
       var(--footer-navy-deep),
-      var(--footer-navy)
-    );
+      var(--footer-navy));
 }
 
 .site-footer__accent {
@@ -850,8 +1101,7 @@
 .site-footer__main {
   display: grid;
   grid-template-columns:
-    minmax(210px, 0.6fr)
-    minmax(480px, 1.5fr);
+    minmax(210px, 0.6fr) minmax(480px, 1.5fr);
 
   column-gap: clamp(52px, 7vw, 116px);
 
@@ -1053,8 +1303,7 @@
 .footer-connect {
   display: grid;
   grid-template-columns:
-    minmax(0, 1fr)
-    minmax(300px, 0.85fr);
+    minmax(0, 1fr) minmax(300px, 0.85fr);
 
   gap: 40px 56px;
 
@@ -1070,7 +1319,7 @@
   margin-left: 50px;
 }
 
-.footer-connect__info > p {
+.footer-connect__info>p {
   margin: 0;
 
   color: var(--footer-muted);
@@ -1283,8 +1532,7 @@
 
   .footer-connect {
     grid-template-columns:
-      minmax(0, 1fr)
-      minmax(260px, 0.7fr);
+      minmax(0, 1fr) minmax(260px, 0.7fr);
 
     gap: 34px 40px;
   }
@@ -1441,6 +1689,7 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
+
   .footer-logo,
   .footer-menu__group-title,
   .footer-menu__group li a,
