@@ -32,6 +32,17 @@ const RINKCARD_IMAGE_BASE =
 const RINKCARDS_BACKGROUND_SRC =
   `${import.meta.env.BASE_URL}gsc-background.jpg`;
 
+const NET_IMAGE_SRC =
+  `${import.meta.env.BASE_URL}net.png`;
+
+// Matches the crease diameter (radius 5, spanning 10 rink units).
+const NET_MOUTH_WIDTH = 10;
+// Scaled from NET_MOUTH_WIDTH using net.png's cropped aspect ratio (535x1023).
+const NET_DEPTH = 5.23;
+// Small standoff so the net's red goal bar sits just behind the crease's
+// flat edge instead of flush against it (~2px at typical rink render widths).
+const NET_GAP = 0.35;
+
 const RINK_RESIZE_DURATION = 720;
 
 const RINK_RESIZE_EASING =
@@ -56,7 +67,7 @@ const navigationLinks = [
   },
   {
     title: "Membership",
-    description: "Learn about memberships",
+    description: "Apply to become a member",
     href: `${SITE_BASE_URL}/admissions`,
     image: `${RINKCARD_IMAGE_BASE}membership.jpg`,
     position: "center 100%",
@@ -365,6 +376,28 @@ function LandscapeRinkMarkings() {
       />
 
       <image
+        href={NET_IMAGE_SRC}
+        x={12 - NET_GAP - NET_DEPTH}
+        y={45 - NET_MOUTH_WIDTH / 2}
+        width={NET_DEPTH}
+        height={NET_MOUTH_WIDTH}
+        preserveAspectRatio="xMidYMid meet"
+        className="rinkcards-rink__net"
+      />
+
+      <g transform={`translate(${188 + NET_GAP + NET_DEPTH}, 0) scale(-1, 1)`}>
+        <image
+          href={NET_IMAGE_SRC}
+          x="0"
+          y={45 - NET_MOUTH_WIDTH / 2}
+          width={NET_DEPTH}
+          height={NET_MOUTH_WIDTH}
+          preserveAspectRatio="xMidYMid meet"
+          className="rinkcards-rink__net"
+        />
+      </g>
+
+      <image
         href={CENTER_ICE_LOGO_SRC}
         x="87"
         y="32"
@@ -509,6 +542,30 @@ function PortraitRinkMarkings() {
         d="M 40 188 A 5 5 0 0 0 50 188 Z"
         className="rinkcards-rink__crease"
       />
+
+      <g transform={`translate(45, ${12 - NET_GAP - NET_DEPTH}) rotate(90)`}>
+        <image
+          href={NET_IMAGE_SRC}
+          x="0"
+          y={-NET_MOUTH_WIDTH / 2}
+          width={NET_DEPTH}
+          height={NET_MOUTH_WIDTH}
+          preserveAspectRatio="xMidYMid meet"
+          className="rinkcards-rink__net"
+        />
+      </g>
+
+      <g transform={`translate(45, ${188 + NET_GAP + NET_DEPTH}) rotate(-90)`}>
+        <image
+          href={NET_IMAGE_SRC}
+          x="0"
+          y={-NET_MOUTH_WIDTH / 2}
+          width={NET_DEPTH}
+          height={NET_MOUTH_WIDTH}
+          preserveAspectRatio="xMidYMid meet"
+          className="rinkcards-rink__net"
+        />
+      </g>
 
       <image
         href={CENTER_ICE_LOGO_SRC}
@@ -1003,8 +1060,8 @@ function RinkCardsSection() {
         backgroundImage:
           `radial-gradient(
             ellipse at 50% -18%,
-            rgba(87, 135, 205, 0.48) 0%,
-            rgba(35, 77, 135, 0.2) 38%,
+            rgba(87, 135, 205, 0.28) 0%,
+            rgba(35, 77, 135, 0.12) 38%,
             transparent 66%
           ),
           linear-gradient(

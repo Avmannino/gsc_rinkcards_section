@@ -10,9 +10,33 @@
 }
 
 @font-face {
-  font-family: "ArtBrush Medium";
-  src: url("./fonts/artBrushMed.ttf") format("truetype");
+  font-family: "Oswald";
+  src: url("./fonts/Oswald-ExtraLight.ttf") format("truetype");
+  font-weight: 200;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Oswald";
+  src: url("./fonts/Oswald-Regular.ttf") format("truetype");
   font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Oswald";
+  src: url("./fonts/Oswald-SemiBold.ttf") format("truetype");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Oswald";
+  src: url("./fonts/Oswald-Bold.ttf") format("truetype");
+  font-weight: 700;
   font-style: normal;
   font-display: swap;
 }
@@ -84,7 +108,7 @@
   flex-direction: column;
   align-items: center;
 
-  margin: 0 0 clamp(30px, 3.3vw, 48px);
+  margin: 0 0 clamp(22px, 2.4vw, 34px);
 
   text-align: center;
 }
@@ -94,13 +118,9 @@
 
   color: #ffffff;
 
-  font-family:
-    "ArtBrush Medium",
-    "Bebas Neue",
-    Impact,
-    sans-serif;
+  font-family: "Oswald", sans-serif;
   font-size: clamp(2.3rem, 3.6vw, 4.1rem);
-  font-weight: 400;
+  font-weight: 600;
   letter-spacing: 0.055em;
   line-height: 0.98;
   text-transform: uppercase;
@@ -112,7 +132,7 @@
   width: 160px;
   height: 2px;
 
-  margin-top: clamp(14px, 1.5vw, 20px);
+  margin-top: clamp(22px, 2.4vw, 34px);
 
   background: linear-gradient(90deg,
       transparent 0%,
@@ -445,10 +465,8 @@
   line-height: 1.02;
 }
 
-@media (min-width: 1200px) {
-  .rink-card--program-item .rink-card__rule {
-    margin-top: 8px;
-  }
+.rink-card--program-item .rink-card__rule {
+  margin-top: clamp(18px, 1.8vw, 26px);
 }
 
 .rink-card__media,
@@ -529,13 +547,9 @@
 
   color: #ffffff;
 
-  font-family:
-    "ArtBrush Medium",
-    "Bebas Neue",
-    Impact,
-    sans-serif;
+  font-family: "Oswald", sans-serif;
   font-size: clamp(1.6rem, 1.7vw, 2.2rem);
-  font-weight: 400;
+  font-weight: 600;
   letter-spacing: 0.035em;
   line-height: 0.98;
   text-transform: uppercase;
@@ -595,9 +609,9 @@
 
   color: rgba(255, 255, 255, 0.9);
 
-  font-family: "Montserrat", sans-serif;
-  font-size: clamp(0.75rem, 0.68vw, 0.88rem);
-  font-weight: 500;
+  font-family: "Oswald", sans-serif;
+  font-size: clamp(0.85rem, 0.78vw, 1rem);
+  font-weight: 200;
   line-height: 1.55;
 
   text-shadow: 0 2px 8px rgba(0, 0, 0, 0.62);
@@ -608,7 +622,7 @@
   max-width: 100%;
   min-height: 3.1em;
 
-  font-size: clamp(0.68rem, 0.58vw, 0.74rem);
+  font-size: clamp(0.76rem, 0.66vw, 0.84rem);
 }
 
 .rink-card__rule {
@@ -736,7 +750,7 @@
 
   .rink-card--programs .rink-card__description,
   .rink-card--directions .rink-card__description {
-    font-size: clamp(0.76rem, 1.3vw, 0.94rem);
+    font-size: clamp(0.85rem, 1.4vw, 1.04rem);
   }
 
   .rinkcards-grid--programs {
@@ -769,10 +783,6 @@
   .rinkcards-section {
     padding:
       clamp(62px, 11vw, 86px) 14px clamp(76px, 12vw, 100px);
-  }
-
-  .rinkcards-heading {
-    margin-bottom: clamp(26px, 6vw, 38px);
   }
 
   .rinkcards-heading h1 {
@@ -822,7 +832,7 @@
   .rink-card--directions .rink-card__description {
     max-width: 100%;
 
-    font-size: clamp(0.69rem, 1.9vw, 0.84rem);
+    font-size: clamp(0.78rem, 2vw, 0.94rem);
   }
 
   .rink-card__rule {
@@ -895,6 +905,7 @@
   .rink-card--directions .rink-card__content,
   .rink-card--program-item .rink-card__content {
     padding: 14px;
+    bottom: 10px;
   }
 
   .rink-card__title,
@@ -903,10 +914,15 @@
   .rink-card--directions .rink-card__title,
   .rink-card--program-item .rink-card__title {
     font-size: clamp(1.02rem, 5vw, 1.48rem);
+    font-weight: 700;
     line-height: 1.02;
   }
 
   .rink-card__description {
+    display: none;
+  }
+
+  .rinkcards-rink__net {
     display: none;
   }
 
