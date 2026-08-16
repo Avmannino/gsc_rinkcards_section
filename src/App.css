@@ -1209,6 +1209,7 @@
 
 .footer-logo:focus-visible,
 .footer-menu a:focus-visible,
+.footer-menu button:focus-visible,
 .footer-connect a:focus-visible,
 .site-footer__bottom a:focus-visible {
   outline: 2px solid var(--footer-red);
@@ -1227,11 +1228,19 @@
 .footer-menu__group-title {
   display: flex;
   align-items: center;
+  justify-content: space-between;
 
-  padding-bottom: 11px;
-  margin-bottom: 9px;
+  gap: 10px;
 
+  width: 100%;
+
+  padding: 0 0 11px;
+  margin: 0 0 9px;
+
+  border: none;
   border-bottom: 1px solid var(--footer-line);
+
+  background: none;
 
   color: var(--footer-white);
 
@@ -1244,7 +1253,40 @@
   font-weight: 400;
   letter-spacing: 0.05em;
   line-height: 1;
+  text-align: left;
   text-transform: uppercase;
+
+  cursor: pointer;
+
+  transition: color 180ms ease;
+}
+
+.footer-menu__group-title:hover {
+  color: var(--footer-red);
+}
+
+.footer-menu__group-arrow {
+  display: inline-flex;
+  flex: 0 0 auto;
+
+  transform: rotate(90deg);
+
+  transition: transform 220ms ease;
+}
+
+.footer-menu__group-arrow--open {
+  transform: rotate(-90deg);
+}
+
+.footer-menu__group-panel {
+  display: grid;
+  grid-template-rows: 0fr;
+
+  transition: grid-template-rows 280ms ease;
+}
+
+.footer-menu__group-panel--open {
+  grid-template-rows: 1fr;
 }
 
 .footer-menu__group ul {
@@ -1252,9 +1294,13 @@
   padding: 0;
 
   list-style: none;
+  overflow: hidden;
+
+  min-height: 0;
 }
 
 .footer-menu__group a svg,
+.footer-menu__group button svg,
 .member-button svg {
   width: 15px;
   height: 15px;
@@ -1667,6 +1713,8 @@
 
   .footer-menu__group-title {
     justify-content: center;
+
+    transform: translateX(10px);
   }
 
   .footer-menu__group li a svg {
@@ -1708,6 +1756,8 @@
 
   .footer-logo,
   .footer-menu__group-title,
+  .footer-menu__group-arrow,
+  .footer-menu__group-panel,
   .footer-menu__group li a,
   .footer-connect__details a,
   .member-button,

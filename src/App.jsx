@@ -1276,6 +1276,23 @@ function FooterLogo() {
 }
 
 function ExploreMenu() {
+  const [openGroups, setOpenGroups] =
+    useState(() => new Set());
+
+  const toggleGroup = (title) => {
+    setOpenGroups((current) => {
+      const next = new Set(current);
+
+      if (next.has(title)) {
+        next.delete(title);
+      } else {
+        next.add(title);
+      }
+
+      return next;
+    });
+  };
+
   return (
     <nav
       className="footer-menu"
@@ -1285,37 +1302,73 @@ function ExploreMenu() {
 
       <div className="footer-menu__groups">
         {exploreGroups.map(
-          (group) => (
-            <div
-              className="footer-menu__group"
-              key={group.title}
-            >
-              <div className="footer-menu__group-title">
-                <span>
-                  {group.title}
-                </span>
+          (group) => {
+            const isOpen = openGroups.has(
+              group.title,
+            );
+
+            return (
+              <div
+                className="footer-menu__group"
+                key={group.title}
+              >
+                <button
+                  type="button"
+                  className="footer-menu__group-title"
+                  onClick={() =>
+                    toggleGroup(group.title)
+                  }
+                  aria-expanded={isOpen}
+                >
+                  <span>
+                    {group.title}
+                  </span>
+
+                  <span
+                    className={
+                      `footer-menu__group-arrow${
+                        isOpen
+                          ? " footer-menu__group-arrow--open"
+                          : ""
+                      }`
+                    }
+                    aria-hidden="true"
+                  >
+                    <ArrowIcon />
+                  </span>
+                </button>
+
+                <div
+                  className={
+                    `footer-menu__group-panel${
+                      isOpen
+                        ? " footer-menu__group-panel--open"
+                        : ""
+                    }`
+                  }
+                >
+                  <ul>
+                    {group.links.map(
+                      (link) => (
+                        <li key={link.label}>
+                          <a
+                            href={link.href}
+                            target="_top"
+                          >
+                            <span>
+                              {link.label}
+                            </span>
+
+                            <ArrowIcon />
+                          </a>
+                        </li>
+                      ),
+                    )}
+                  </ul>
+                </div>
               </div>
-
-              <ul>
-                {group.links.map(
-                  (link) => (
-                    <li key={link.label}>
-                      <a
-                        href={link.href}
-                        target="_top"
-                      >
-                        <span>
-                          {link.label}
-                        </span>
-
-                        <ArrowIcon />
-                      </a>
-                    </li>
-                  ),
-                )}
-              </ul>
-            </div>
-          ),
+            );
+          },
         )}
       </div>
     </nav>
