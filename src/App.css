@@ -1188,7 +1188,7 @@
 .footer-logo {
   display: inline-flex;
 
-  width: clamp(132px, 10vw, 172px);
+  width: clamp(96px, 7.2vw, 126px);
 
   margin-left: 20px;
   margin-top: 20px;
@@ -1223,6 +1223,10 @@
 
   column-gap: 30px;
   row-gap: 28px;
+}
+
+.footer-menu__group {
+  contain: layout;
 }
 
 .footer-menu__group-title {
@@ -1281,6 +1285,9 @@
 .footer-menu__group-panel {
   display: grid;
   grid-template-rows: 0fr;
+
+  contain: layout;
+  will-change: grid-template-rows;
 
   transition: grid-template-rows 280ms ease;
 }
@@ -1630,7 +1637,7 @@
   }
 
   .footer-logo {
-    width: 138px;
+    width: 100px;
   }
 
   .footer-menu__groups {
@@ -1688,7 +1695,7 @@
     position: relative;
     left: -8px;
 
-    width: 110px;
+    width: 80px;
 
     margin: 0 auto;
   }
