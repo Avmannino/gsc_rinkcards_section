@@ -1283,17 +1283,14 @@
 }
 
 .footer-menu__group-panel {
-  display: grid;
-  grid-template-rows: 0fr;
+  overflow: hidden;
+
+  max-height: 0;
 
   contain: layout;
-  will-change: grid-template-rows;
+  will-change: max-height;
 
-  transition: grid-template-rows 280ms ease;
-}
-
-.footer-menu__group-panel--open {
-  grid-template-rows: 1fr;
+  transition: max-height 280ms ease;
 }
 
 .footer-menu__group ul {
@@ -1301,9 +1298,6 @@
   padding: 0;
 
   list-style: none;
-  overflow: hidden;
-
-  min-height: 0;
 }
 
 .footer-menu__group a svg,

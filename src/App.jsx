@@ -1279,6 +1279,30 @@ function ExploreMenu() {
   const [openGroups, setOpenGroups] =
     useState(() => new Set());
 
+  const [panelHeights, setPanelHeights] =
+    useState({});
+
+  const panelRefs = useRef(new Map());
+
+  /*
+   * Measure each panel's natural content height once after mount.
+   * scrollHeight is unaffected by the wrapper's own collapsed
+   * max-height, so every group can be measured up front even though
+   * none of them start open. The animation then transitions between
+   * two known pixel values instead of guessing a large max-height,
+   * which is both smoother and avoids the "long pause at the end"
+   * artifact that an oversized max-height guess produces.
+   */
+  useEffect(() => {
+    const heights = {};
+
+    panelRefs.current.forEach((node, title) => {
+      heights[title] = node.scrollHeight;
+    });
+
+    setPanelHeights(heights);
+  }, []);
+
   const toggleGroup = (title) => {
     setOpenGroups((current) => {
       const next = new Set(current);
@@ -1306,6 +1330,9 @@ function ExploreMenu() {
             const isOpen = openGroups.has(
               group.title,
             );
+
+            const measuredHeight =
+              panelHeights[group.title];
 
             return (
               <div
@@ -1346,8 +1373,26 @@ function ExploreMenu() {
                         : ""
                     }`
                   }
+                  style={{
+                    maxHeight: isOpen
+                      ? `${measuredHeight ?? 600}px`
+                      : "0px",
+                  }}
                 >
-                  <ul>
+                  <ul
+                    ref={(node) => {
+                      if (node) {
+                        panelRefs.current.set(
+                          group.title,
+                          node,
+                        );
+                      } else {
+                        panelRefs.current.delete(
+                          group.title,
+                        );
+                      }
+                    }}
+                  >
                     {group.links.map(
                       (link) => (
                         <li key={link.label}>
