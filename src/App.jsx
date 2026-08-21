@@ -107,6 +107,7 @@ const programLinks = [
     image: `${RINKCARD_IMAGE_BASE}learn-to-skate.jpg`,
     position: "center center",
     layout: "program-item",
+    compactTitle: true,
   },
   {
     title: "Mini Mites",
@@ -123,6 +124,8 @@ const programLinks = [
     image: `${RINKCARD_IMAGE_BASE}youth-travel-hockey.jpg`,
     position: "center center",
     layout: "program-item",
+    compactTitle: true,
+    wideArrowGap: true,
   },
   {
     title: "Stateline Girls Hockey",
@@ -131,6 +134,8 @@ const programLinks = [
     image: `${RINKCARD_IMAGE_BASE}stateline-girls-hockey.jpg`,
     position: "center center",
     layout: "program-item",
+    compactTitle: true,
+    wideArrowGap: true,
   },
   {
     title: "Figure Skating",
@@ -139,6 +144,8 @@ const programLinks = [
     image: `${RINKCARD_IMAGE_BASE}figure-skating.jpg`,
     position: "center center",
     layout: "program-item",
+    compactTitle: true,
+    tightTitleGap: true,
   },
   {
     title: "Adult Hockey",
@@ -147,6 +154,8 @@ const programLinks = [
     image: `${RINKCARD_IMAGE_BASE}adult-hockey.jpeg`,
     position: "center center",
     layout: "program-item",
+    compactTitle: true,
+    tightTitleGap: true,
   },
 ];
 
@@ -797,7 +806,10 @@ function RinkCard({
     `rink-card rink-card--${link.layout}` +
     `${onClick ? " rink-card--button" : ""}` +
     `${isPressed ? " rink-card--toggle-active" : ""}` +
-    `${shouldAnimate ? " rink-card--entrance" : ""}`;
+    `${shouldAnimate ? " rink-card--entrance" : ""}` +
+    `${link.compactTitle ? " rink-card--compact-title" : ""}` +
+    `${link.wideArrowGap ? " rink-card--wide-arrow-gap" : ""}` +
+    `${link.tightTitleGap ? " rink-card--tight-title-gap" : ""}`;
 
   const cardStyle = {
     "--card-index": animationIndex,
@@ -856,6 +868,15 @@ function RinkCard({
           aria-hidden="true"
         />
       </span>
+
+      {link.layout === "program-item" && (
+        <span
+          className="rink-card__arrow rink-card__arrow--corner"
+          aria-hidden="true"
+        >
+          <CardArrowIcon direction={arrowDirection} />
+        </span>
+      )}
     </>
   );
 
@@ -1268,6 +1289,14 @@ function RinkCardsSection() {
           url("${RINKCARDS_BACKGROUND_SRC}")`,
       }}
     >
+      <div
+        className="rinkcards-section__accent"
+        aria-hidden="true"
+      >
+        <span />
+        <span />
+      </div>
+
       <div
         className="rinkcards-section__ambient"
         aria-hidden="true"
