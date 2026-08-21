@@ -1639,7 +1639,7 @@ function ConnectPanel() {
             <PinIcon />
 
             <span>
-              Cardinal Road · Greenwich, Connecticut
+              11 Cardinal Road · Greenwich, CT 06830
             </span>
           </a>
 

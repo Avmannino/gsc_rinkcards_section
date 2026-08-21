@@ -1876,8 +1876,6 @@
 
   .footer-menu__group-title {
     justify-content: center;
-
-    transform: translateX(10px);
   }
 
   .footer-menu__group li a svg {
@@ -1889,7 +1887,26 @@
   }
 
   .footer-connect {
+    position: relative;
+
     padding-top: 24px;
+
+    border-top: none;
+  }
+
+  .footer-connect::before {
+    content: "";
+
+    position: absolute;
+    top: 0;
+    left: 50%;
+
+    width: 232px;
+    height: 1px;
+
+    transform: translateX(-50%);
+
+    background: #e51837;
   }
 
   .footer-connect__info {
