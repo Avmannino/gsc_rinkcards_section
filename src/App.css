@@ -144,6 +144,7 @@
 .rinkcards-rink {
   position: relative;
   isolation: isolate;
+  container-type: inline-size;
 
   width: 100%;
   min-width: 0;
@@ -255,7 +256,7 @@
 .rinkcards-rink__circle {
   fill: none;
   stroke: var(--gsc-red);
-  stroke-width: 0.75;
+  stroke-width: 0.95;
   opacity: 0.13;
 }
 
@@ -277,6 +278,156 @@
   opacity: 0.1;
 }
 
+.rinkcards-rink__circles {
+  position: absolute;
+  z-index: 1;
+  inset: 0;
+
+  pointer-events: none;
+}
+
+.rinkcards-rink__circle-shape {
+  position: absolute;
+
+  aspect-ratio: 1;
+
+  transform: translate(-50%, -50%);
+
+  border: 2px solid var(--gsc-red);
+  border-radius: 50%;
+  opacity: 0.13;
+}
+
+.rinkcards-rink__dot-shape {
+  position: absolute;
+
+  aspect-ratio: 1;
+
+  transform: translate(-50%, -50%);
+
+  background: var(--gsc-red);
+  border-radius: 50%;
+  opacity: 0.18;
+}
+
+.rinkcards-rink__faceoff-l {
+  position: absolute;
+
+  width: 1.15cqw;
+  height: 1.15cqw;
+
+  transform: translate(-50%, -50%);
+
+  opacity: 0.15;
+}
+
+.rinkcards-rink__faceoff-l--top-left {
+  border-right: 0.18cqw solid var(--gsc-red);
+  border-bottom: 0.18cqw solid var(--gsc-red);
+}
+
+.rinkcards-rink__faceoff-l--top-right {
+  border-left: 0.18cqw solid var(--gsc-red);
+  border-bottom: 0.18cqw solid var(--gsc-red);
+}
+
+.rinkcards-rink__faceoff-l--bottom-left {
+  border-right: 0.18cqw solid var(--gsc-red);
+  border-top: 0.18cqw solid var(--gsc-red);
+}
+
+.rinkcards-rink__faceoff-l--bottom-right {
+  border-left: 0.18cqw solid var(--gsc-red);
+  border-top: 0.18cqw solid var(--gsc-red);
+}
+
+.rinkcards-rink__faceoff-l-svg {
+  fill: none;
+  stroke: var(--gsc-red);
+  stroke-width: 0.55;
+  stroke-linecap: square;
+  stroke-linejoin: miter;
+  opacity: 0.13;
+}
+
+.rinkcards-rink__curling-house {
+  position: absolute;
+
+  aspect-ratio: 1;
+
+  transform: translate(-50%, -50%);
+
+  border: 1.3px solid rgba(63, 115, 182, 0.3);
+  border-radius: 50%;
+
+  background: rgba(63, 115, 182, 0.07);
+  opacity: 0.72;
+}
+
+.rinkcards-rink__curling-house-ring,
+.rinkcards-rink__curling-house-button {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+
+  aspect-ratio: 1;
+  border-radius: 50%;
+
+  transform: translate(-50%, -50%);
+}
+
+.rinkcards-rink__curling-house-ring--middle {
+  width: 66.666%;
+
+  border: 1.2px solid rgba(229, 24, 55, 0.26);
+  background: rgba(229, 24, 55, 0.035);
+}
+
+.rinkcards-rink__curling-house-ring--inner {
+  width: 33.333%;
+
+  border: 1.2px solid rgba(63, 115, 182, 0.3);
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.rinkcards-rink__curling-house-button {
+  width: 8.5%;
+  background: rgba(229, 24, 55, 0.26);
+}
+
+.rinkcards-rink__curling-house-svg-outer,
+.rinkcards-rink__curling-house-svg-middle,
+.rinkcards-rink__curling-house-svg-inner {
+  fill: transparent;
+}
+
+.rinkcards-rink__curling-house-svg-outer {
+  fill: rgba(63, 115, 182, 0.07);
+  stroke: rgba(63, 115, 182, 0.3);
+  stroke-width: 0.62;
+}
+
+.rinkcards-rink__curling-house-svg-middle {
+  fill: rgba(229, 24, 55, 0.035);
+  stroke: rgba(229, 24, 55, 0.26);
+  stroke-width: 0.58;
+}
+
+.rinkcards-rink__curling-house-svg-inner {
+  fill: rgba(255, 255, 255, 0.035);
+  stroke: rgba(63, 115, 182, 0.3);
+  stroke-width: 0.56;
+}
+
+.rinkcards-rink__curling-house-svg-button {
+  fill: rgba(229, 24, 55, 0.26);
+  stroke: none;
+}
+
+.rinkcards-rink__curling-house-svg {
+  opacity: 0.72;
+}
+
 /*
  * Rink orientation:
  * - 1000px and wider: normal landscape rink markings
@@ -292,6 +443,10 @@
 
 @media (max-width: 999px) {
   .rinkcards-rink__markings--landscape {
+    display: none;
+  }
+
+  .rinkcards-rink__circles {
     display: none;
   }
 
@@ -790,8 +945,9 @@
   }
 
   .rinkcards-rink {
+    /* Extra end-zone room so the portrait nets and creases remain visible. */
     padding:
-      clamp(30px, 6vw, 42px) clamp(22px, 5vw, 34px);
+      clamp(56px, 9vw, 68px) clamp(22px, 5vw, 34px);
 
     border-radius: clamp(46px, 10vw, 76px);
   }
@@ -873,7 +1029,7 @@
 
   .rinkcards-rink {
     padding:
-      28px 16px;
+      clamp(58px, 15vw, 72px) 16px;
 
     border-radius: clamp(38px, 13vw, 58px);
   }
@@ -922,10 +1078,6 @@
     display: none;
   }
 
-  .rinkcards-rink__net {
-    display: none;
-  }
-
   .rink-card__rule {
     width: 34px;
     margin-top: 10px;
@@ -953,6 +1105,16 @@
     opacity: 0.11;
   }
 
+  .rinkcards-rink__circle-shape,
+  .rinkcards-rink__dot-shape,
+  .rinkcards-rink__faceoff-l {
+    opacity: 0.11;
+  }
+
+  .rinkcards-rink__curling-house {
+    opacity: 0.66;
+  }
+
   .rinkcards-rink__logo {
     opacity: 0.07;
   }
@@ -965,7 +1127,7 @@
   }
 
   .rinkcards-rink {
-    padding: 24px 12px;
+    padding: 58px 12px;
     border-radius: 38px;
   }
 

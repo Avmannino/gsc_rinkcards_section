@@ -272,17 +272,17 @@ function LandscapeRinkMarkings() {
       />
 
       <line
-        x1="70"
+        x1="75"
         y1="0"
-        x2="70"
+        x2="75"
         y2="90"
         className="rinkcards-rink__blue-line"
       />
 
       <line
-        x1="130"
+        x1="125"
         y1="0"
-        x2="130"
+        x2="125"
         y2="90"
         className="rinkcards-rink__blue-line"
       />
@@ -293,76 +293,6 @@ function LandscapeRinkMarkings() {
         x2="100"
         y2="90"
         className="rinkcards-rink__center-line"
-      />
-
-      <circle
-        cx="100"
-        cy="45"
-        r="14"
-        className="rinkcards-rink__circle"
-      />
-
-      <circle
-        cx="48"
-        cy="26"
-        r="10"
-        className="rinkcards-rink__circle"
-      />
-
-      <circle
-        cx="48"
-        cy="64"
-        r="10"
-        className="rinkcards-rink__circle"
-      />
-
-      <circle
-        cx="152"
-        cy="26"
-        r="10"
-        className="rinkcards-rink__circle"
-      />
-
-      <circle
-        cx="152"
-        cy="64"
-        r="10"
-        className="rinkcards-rink__circle"
-      />
-
-      <circle
-        cx="100"
-        cy="45"
-        r="1.35"
-        className="rinkcards-rink__dot"
-      />
-
-      <circle
-        cx="48"
-        cy="26"
-        r="1.15"
-        className="rinkcards-rink__dot"
-      />
-
-      <circle
-        cx="48"
-        cy="64"
-        r="1.15"
-        className="rinkcards-rink__dot"
-      />
-
-      <circle
-        cx="152"
-        cy="26"
-        r="1.15"
-        className="rinkcards-rink__dot"
-      />
-
-      <circle
-        cx="152"
-        cy="64"
-        r="1.15"
-        className="rinkcards-rink__dot"
       />
 
       <path
@@ -408,6 +338,238 @@ function LandscapeRinkMarkings() {
       />
     </svg>
   );
+}
+
+// Corner faceoff circle centers (landscape), as % of the rink container —
+// positioned to match the final rink layout used across the GSC projects.
+const FACEOFF_CIRCLE_CENTERS = [
+  { left: 15.5, top: 20.56 },
+  { left: 15.5, top: 79.44 },
+  { left: 84.5, top: 20.56 },
+  { left: 84.5, top: 79.44 },
+];
+
+// The four small L brackets around each end-zone faceoff dot.
+// These sit inside the faceoff circle and do not affect the circle itself.
+const FACEOFF_L_OFFSET_CQW = 1.55;
+
+// Curling house dimensions are based on the rink container width so the
+// rings remain true circles on the landscape rink. The center offset leaves
+// a small visible gap between each hockey faceoff circle and curling house.
+const CURLING_HOUSE_SIZE_CQW = 5.6;
+const CURLING_HOUSE_CENTER_OFFSET_CQW = 9.4;
+
+function FaceoffLBrackets() {
+  const corners = [
+    { x: -1, y: -1, className: "top-left" },
+    { x: 1, y: -1, className: "top-right" },
+    { x: -1, y: 1, className: "bottom-left" },
+    { x: 1, y: 1, className: "bottom-right" },
+  ];
+
+  return FACEOFF_CIRCLE_CENTERS.flatMap(({ left, top }, circleIndex) =>
+    corners.map(({ x, y, className }) => (
+      <span
+        key={`${circleIndex}-${className}`}
+        className={`rinkcards-rink__faceoff-l rinkcards-rink__faceoff-l--${className}`}
+        style={{
+          left: `calc(${left}% + ${x * FACEOFF_L_OFFSET_CQW}cqw)`,
+          top: `calc(${top}% + ${y * FACEOFF_L_OFFSET_CQW}cqw)`,
+        }}
+      />
+    )),
+  );
+}
+
+function CurlingHouse({ left, top }) {
+  return (
+    <span
+      className="rinkcards-rink__curling-house"
+      style={{
+        left,
+        top,
+        width: `${CURLING_HOUSE_SIZE_CQW}cqw`,
+      }}
+    >
+      <span className="rinkcards-rink__curling-house-ring rinkcards-rink__curling-house-ring--middle" />
+      <span className="rinkcards-rink__curling-house-ring rinkcards-rink__curling-house-ring--inner" />
+      <span className="rinkcards-rink__curling-house-button" />
+    </span>
+  );
+}
+
+function LandscapeRinkCircles() {
+  return (
+    <div
+      className="rinkcards-rink__circles"
+      aria-hidden="true"
+    >
+      <span
+        className="rinkcards-rink__circle-shape"
+        style={{ left: "50%", top: "50%", width: "14%" }}
+      />
+
+      <span
+        className="rinkcards-rink__circle-shape"
+        style={{ left: "15.5%", top: "20.56%", width: "10%" }}
+      />
+
+      <span
+        className="rinkcards-rink__circle-shape"
+        style={{ left: "15.5%", top: "79.44%", width: "10%" }}
+      />
+
+      <span
+        className="rinkcards-rink__circle-shape"
+        style={{ left: "84.5%", top: "20.56%", width: "10%" }}
+      />
+
+      <span
+        className="rinkcards-rink__circle-shape"
+        style={{ left: "84.5%", top: "79.44%", width: "10%" }}
+      />
+
+      <span
+        className="rinkcards-rink__dot-shape"
+        style={{ left: "50%", top: "50%", width: "1.35%" }}
+      />
+
+      <span
+        className="rinkcards-rink__dot-shape"
+        style={{ left: "15.5%", top: "20.56%", width: "1.15%" }}
+      />
+
+      <span
+        className="rinkcards-rink__dot-shape"
+        style={{ left: "15.5%", top: "79.44%", width: "1.15%" }}
+      />
+
+      <span
+        className="rinkcards-rink__dot-shape"
+        style={{ left: "84.5%", top: "20.56%", width: "1.15%" }}
+      />
+
+      <span
+        className="rinkcards-rink__dot-shape"
+        style={{ left: "84.5%", top: "79.44%", width: "1.15%" }}
+      />
+
+      <span
+        className="rinkcards-rink__dot-shape"
+        style={{ left: "40%", top: "20.56%", width: "1.3%" }}
+      />
+
+      <span
+        className="rinkcards-rink__dot-shape"
+        style={{ left: "40%", top: "79.44%", width: "1.3%" }}
+      />
+
+      <span
+        className="rinkcards-rink__dot-shape"
+        style={{ left: "60%", top: "20.56%", width: "1.3%" }}
+      />
+
+      <span
+        className="rinkcards-rink__dot-shape"
+        style={{ left: "60%", top: "79.44%", width: "1.3%" }}
+      />
+
+      <FaceoffLBrackets />
+
+      <CurlingHouse
+        left={`calc(15.5% + ${CURLING_HOUSE_CENTER_OFFSET_CQW}cqw)`}
+        top="20.56%"
+      />
+      <CurlingHouse
+        left={`calc(15.5% + ${CURLING_HOUSE_CENTER_OFFSET_CQW}cqw)`}
+        top="79.44%"
+      />
+      <CurlingHouse
+        left={`calc(84.5% - ${CURLING_HOUSE_CENTER_OFFSET_CQW}cqw)`}
+        top="20.56%"
+      />
+      <CurlingHouse
+        left={`calc(84.5% - ${CURLING_HOUSE_CENTER_OFFSET_CQW}cqw)`}
+        top="79.44%"
+      />
+    </div>
+  );
+}
+
+const PORTRAIT_FACEOFF_CENTERS = [
+  { x: 21, y: 43 },
+  { x: 69, y: 43 },
+  { x: 21, y: 157 },
+  { x: 69, y: 157 },
+];
+
+function PortraitFaceoffLBrackets() {
+  return PORTRAIT_FACEOFF_CENTERS.map(({ x, y }) => (
+    <g key={`portrait-l-${x}-${y}`}>
+      {/* Top-left: corner sits nearest the dot; both arms extend outward. */}
+      <path
+        d={`M ${x - 3.0} ${y - 1.15} H ${x - 1.15} V ${y - 3.0}`}
+        className="rinkcards-rink__faceoff-l-svg"
+      />
+
+      {/* Top-right */}
+      <path
+        d={`M ${x + 1.15} ${y - 3.0} V ${y - 1.15} H ${x + 3.0}`}
+        className="rinkcards-rink__faceoff-l-svg"
+      />
+
+      {/* Bottom-left */}
+      <path
+        d={`M ${x - 3.0} ${y + 1.15} H ${x - 1.15} V ${y + 3.0}`}
+        className="rinkcards-rink__faceoff-l-svg"
+      />
+
+      {/* Bottom-right */}
+      <path
+        d={`M ${x + 1.15} ${y + 3.0} V ${y + 1.15} H ${x + 3.0}`}
+        className="rinkcards-rink__faceoff-l-svg"
+      />
+    </g>
+  ));
+}
+
+function PortraitCurlingHouses() {
+  return PORTRAIT_FACEOFF_CENTERS.map(({ x, y }) => {
+    const direction = y < 100 ? 1 : -1;
+    const houseY = y + direction * 18.2;
+
+    return (
+      <g
+        key={`portrait-house-${x}-${y}`}
+        className="rinkcards-rink__curling-house-svg"
+      >
+        <circle
+          cx={x}
+          cy={houseY}
+          r="5.4"
+          className="rinkcards-rink__curling-house-svg-outer"
+        />
+        <circle
+          cx={x}
+          cy={houseY}
+          r="3.55"
+          className="rinkcards-rink__curling-house-svg-middle"
+        />
+        <circle
+          cx={x}
+          cy={houseY}
+          r="1.75"
+          className="rinkcards-rink__curling-house-svg-inner"
+        />
+        <circle
+          cx={x}
+          cy={houseY}
+          r="0.48"
+          className="rinkcards-rink__curling-house-svg-button"
+        />
+      </g>
+    );
+  });
 }
 
 function PortraitRinkMarkings() {
@@ -469,29 +631,29 @@ function PortraitRinkMarkings() {
       />
 
       <circle
-        cx="26"
-        cy="48"
+        cx="21"
+        cy="43"
         r="10"
         className="rinkcards-rink__circle"
       />
 
       <circle
-        cx="64"
-        cy="48"
+        cx="69"
+        cy="43"
         r="10"
         className="rinkcards-rink__circle"
       />
 
       <circle
-        cx="26"
-        cy="152"
+        cx="21"
+        cy="157"
         r="10"
         className="rinkcards-rink__circle"
       />
 
       <circle
-        cx="64"
-        cy="152"
+        cx="69"
+        cy="157"
         r="10"
         className="rinkcards-rink__circle"
       />
@@ -504,42 +666,74 @@ function PortraitRinkMarkings() {
       />
 
       <circle
-        cx="26"
-        cy="48"
+        cx="21"
+        cy="43"
         r="1.15"
         className="rinkcards-rink__dot"
       />
 
       <circle
-        cx="64"
-        cy="48"
+        cx="69"
+        cy="43"
         r="1.15"
         className="rinkcards-rink__dot"
       />
 
       <circle
-        cx="26"
-        cy="152"
+        cx="21"
+        cy="157"
         r="1.15"
         className="rinkcards-rink__dot"
       />
 
       <circle
-        cx="64"
-        cy="152"
+        cx="69"
+        cy="157"
         r="1.15"
         className="rinkcards-rink__dot"
       />
+
+      {/* Neutral-zone faceoff dots — no L brackets around these. */}
+      <circle
+        cx="18.5"
+        cy="80"
+        r="1.3"
+        className="rinkcards-rink__dot"
+      />
+
+      <circle
+        cx="71.5"
+        cy="80"
+        r="1.3"
+        className="rinkcards-rink__dot"
+      />
+
+      <circle
+        cx="18.5"
+        cy="120"
+        r="1.3"
+        className="rinkcards-rink__dot"
+      />
+
+      <circle
+        cx="71.5"
+        cy="120"
+        r="1.3"
+        className="rinkcards-rink__dot"
+      />
+
+      <PortraitFaceoffLBrackets />
+      <PortraitCurlingHouses />
 
       {/* Top crease */}
       <path
-        d="M 40 12 A 5 5 0 0 1 50 12 Z"
+        d="M 40 12 A 5 5 0 0 0 50 12 Z"
         className="rinkcards-rink__crease"
       />
 
       {/* Bottom crease */}
       <path
-        d="M 40 188 A 5 5 0 0 0 50 188 Z"
+        d="M 40 188 A 5 5 0 0 1 50 188 Z"
         className="rinkcards-rink__crease"
       />
 
@@ -585,6 +779,7 @@ function RinkMarkings() {
   return (
     <>
       <LandscapeRinkMarkings />
+      <LandscapeRinkCircles />
       <PortraitRinkMarkings />
     </>
   );
