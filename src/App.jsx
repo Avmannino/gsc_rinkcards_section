@@ -1,6 +1,5 @@
 import {
   useEffect,
-  useLayoutEffect,
   useRef,
   useState,
 } from "react";
@@ -15,16 +14,11 @@ const MEMBER_LOGIN_URL =
 const ADMISSIONS_EMAIL =
   "gscadmissions@greenwichskatingclub.org";
 
-const GSC_PHONE_NUMBER = "(203) 622-9583";
-
 const CENTER_ICE_LOGO_SRC =
   `${import.meta.env.BASE_URL}gsc-logo.png`;
 
 const SCOREBOARD_IMAGE_SRC =
   `${import.meta.env.BASE_URL}scoreboard.png`;
-
-const GO_BACK_ICON_SRC =
-  `${import.meta.env.BASE_URL}go-back.png`;
 
 const RINKCARD_IMAGE_BASE =
   `${import.meta.env.BASE_URL}rinkcards/`;
@@ -43,61 +37,13 @@ const NET_DEPTH = 5.23;
 // flat edge instead of flush against it (~2px at typical rink render widths).
 const NET_GAP = 0.35;
 
-const RINK_RESIZE_DURATION = 720;
-
-const RINK_RESIZE_EASING =
-  "cubic-bezier(0.22, 1, 0.36, 1)";
-
-const navigationLinks = [
-  {
-    title: "Programs",
-    description: "See what’s happening on the ice",
-    image: `${RINKCARD_IMAGE_BASE}programs.jpg`,
-    position: "65% center",
-    layout: "crossbar",
-    isProgramsToggle: true,
-  },
-  {
-    title: "Crossbar Login",
-    description: "Log in to the GSC Crossbar Portal",
-    href: "https://www.greenwichskatingclub.org/login",
-    image: `${RINKCARD_IMAGE_BASE}crossbar-login.png`,
-    position: "center center",
-    layout: "billing",
-  },
-  {
-    title: "Membership",
-    description: "Apply to become a member",
-    href: `${SITE_BASE_URL}/admissions`,
-    image: `${RINKCARD_IMAGE_BASE}membership.jpg`,
-    position: "center 100%",
-    layout: "membership",
-  },
-  {
-    title: "Member Billing",
-    description: "Manage your membership billing",
-    href: "https://members.greenwichskatingclub.org/",
-    image: `${RINKCARD_IMAGE_BASE}member-billing.jpg`,
-    position: "center center",
-    layout: "contact",
-  },
-  {
-    title: "Contact Us",
-    description: "Get in touch with us",
-    href: `${SITE_BASE_URL}/contact`,
-    image: `${RINKCARD_IMAGE_BASE}contact.png`,
-    position: "35% center",
-    layout: "programs",
-  },
-  {
-    title: "Directions",
-    description: "How to find us",
-    href: `${SITE_BASE_URL}/directions`,
-    image: `${RINKCARD_IMAGE_BASE}directions.jpg`,
-    position: "center center",
-    layout: "directions",
-  },
-];
+const PROGRAMS_HEADER_CARD = {
+  title: "Around the Rink",
+  description: "Explore our programs at the skating club",
+  image: `${RINKCARD_IMAGE_BASE}programs.jpg`,
+  position: "65% center",
+  layout: "crossbar",
+};
 
 const programLinks = [
   {
@@ -151,7 +97,7 @@ const programLinks = [
     title: "Adult Hockey",
     description: "Learn more about Adult Hockey",
     href: `${SITE_BASE_URL}/adult-hockey`,
-    image: `${RINKCARD_IMAGE_BASE}adult-hockey.jpeg`,
+    image: `${RINKCARD_IMAGE_BASE}adult-hockey.jpg`,
     position: "center center",
     layout: "program-item",
     compactTitle: true,
@@ -796,16 +742,11 @@ function RinkMarkings() {
 
 function RinkCard({
   link,
-  onClick,
   animationIndex = 0,
-  arrowDirection = "right",
-  isPressed,
   shouldAnimate = false,
 }) {
   const className =
     `rink-card rink-card--${link.layout}` +
-    `${onClick ? " rink-card--button" : ""}` +
-    `${isPressed ? " rink-card--toggle-active" : ""}` +
     `${shouldAnimate ? " rink-card--entrance" : ""}` +
     `${link.compactTitle ? " rink-card--compact-title" : ""}` +
     `${link.wideArrowGap ? " rink-card--wide-arrow-gap" : ""}` +
@@ -839,28 +780,27 @@ function RinkCard({
             {link.title}
           </span>
 
-          <span
-            className="rink-card__arrow rink-card__arrow--inline"
-            aria-hidden="true"
-          >
-            {isPressed ? (
-              <img
-                className="rink-card__arrow-icon"
-                src={GO_BACK_ICON_SRC}
-                alt=""
-              />
-            ) : (
-              <CardArrowIcon
-                direction={arrowDirection}
-              />
-            )}
-          </span>
+          {link.href && (
+            <span
+              className="rink-card__arrow rink-card__arrow--inline"
+              aria-hidden="true"
+            >
+              <CardArrowIcon />
+            </span>
+          )}
         </span>
 
         {link.layout !== "program-item" && (
-          <span className="rink-card__description">
-            {link.description}
-          </span>
+          <>
+            <span
+              className="rink-card__title-divider"
+              aria-hidden="true"
+            />
+
+            <span className="rink-card__description">
+              {link.description}
+            </span>
+          </>
         )}
 
         <span
@@ -874,28 +814,20 @@ function RinkCard({
           className="rink-card__arrow rink-card__arrow--corner"
           aria-hidden="true"
         >
-          <CardArrowIcon direction={arrowDirection} />
+          <CardArrowIcon />
         </span>
       )}
     </>
   );
 
-  if (onClick) {
+  if (!link.href) {
     return (
-      <button
-        type="button"
+      <div
         className={className}
-        onClick={onClick}
         style={cardStyle}
-        aria-pressed={isPressed}
-        aria-label={
-          isPressed
-            ? "Return to the Rinkside Guide"
-            : "Show Greenwich Skating Club programs"
-        }
       >
         {cardContents}
-      </button>
+      </div>
     );
   }
 
@@ -913,26 +845,16 @@ function RinkCard({
 }
 
 function RinkCardsSection() {
-  const [showPrograms, setShowPrograms] =
-    useState(false);
-
   const [
     hasEnteredViewport,
     setHasEnteredViewport,
   ] = useState(false);
 
   const sectionRef = useRef(null);
-  const rinkRef = useRef(null);
-
-  const resizeStartHeightRef =
-    useRef(null);
-
-  const rinkHeightAnimationRef =
-    useRef(null);
 
   /*
    * The initial card entrance does not begin until
-   * the Rinkside Guide actually reaches the viewport.
+   * the section actually reaches the viewport.
    */
   useEffect(() => {
     const section = sectionRef.current;
@@ -979,299 +901,11 @@ function RinkCardsSection() {
     };
   }, [hasEnteredViewport]);
 
-  /*
-   * Before React changes the card layout:
-   *
-   * 1. Read the EXACT currently rendered rink height.
-   * 2. Put that height inline.
-   * 3. Cancel any existing rink-height animation.
-   * 4. Store the exact starting height for the next layout.
-   *
-   * Importantly, the current height is captured BEFORE an
-   * existing animation is cancelled. That means rapid clicks
-   * continue smoothly from the rink's exact visual position
-   * instead of snapping back to an old start/end height.
-   */
-  const handleProgramsToggle = () => {
-    const rink = rinkRef.current;
-
-    if (rink) {
-      const currentHeight =
-        rink.getBoundingClientRect().height;
-
-      /*
-       * Disable the CSS height transition while we lock
-       * the current rendered height.
-       */
-      rink.classList.add(
-        "rinkcards-rink--measuring",
-      );
-
-      rink.style.willChange = "height";
-      rink.style.height =
-        `${currentHeight}px`;
-
-      /*
-       * If a Web Animation is already controlling height,
-       * the inline pixel value above is waiting underneath
-       * it. Cancelling now reveals the exact same height,
-       * so there is no jump.
-       */
-      if (
-        rinkHeightAnimationRef.current
-      ) {
-        rinkHeightAnimationRef.current.cancel();
-        rinkHeightAnimationRef.current =
-          null;
-      }
-
-      /*
-       * Commit the exact current height before React
-       * swaps the grid contents.
-       */
-      void rink.offsetHeight;
-
-      resizeStartHeightRef.current =
-        currentHeight;
-    }
-
-    setShowPrograms(
-      (current) => !current,
-    );
-  };
-
-  /*
-   * This runs synchronously after React has rendered the
-   * new card state but BEFORE the browser paints it.
-   *
-   * We briefly allow the rink to calculate its natural
-   * target height while CSS height transitions are disabled.
-   * We immediately restore the old pixel height and then use
-   * the Web Animations API to animate between the two exact
-   * pixel values.
-   *
-   * This avoids relying on the browser to detect a transition
-   * from "auto" to pixels, and it avoids the first-click race
-   * that can happen when style changes are batched together.
-   */
-  useLayoutEffect(() => {
-    const rink = rinkRef.current;
-
-    const startHeight =
-      resizeStartHeightRef.current;
-
-    if (
-      !rink ||
-      startHeight === null
-    ) {
-      return undefined;
-    }
-
-    resizeStartHeightRef.current =
-      null;
-
-    const prefersReducedMotion =
-      window.matchMedia(
-        "(prefers-reduced-motion: reduce)",
-      ).matches;
-
-    /*
-     * Keep CSS transitions off for the entire measuring /
-     * JS animation sequence. The height animation below is
-     * controlled explicitly by Element.animate().
-     */
-    rink.classList.add(
-      "rinkcards-rink--measuring",
-    );
-
-    rink.style.willChange = "height";
-
-    /*
-     * Measure the new card layout at its true natural height.
-     *
-     * Because useLayoutEffect runs before paint, the user
-     * never sees this temporary auto-height state.
-     */
-    rink.style.height = "auto";
-
-    void rink.offsetHeight;
-
-    const targetHeight =
-      rink.getBoundingClientRect().height;
-
-    /*
-     * Restore the old visual height before anything is
-     * painted to screen.
-     */
-    rink.style.height =
-      `${startHeight}px`;
-
-    void rink.offsetHeight;
-
-    if (
-      prefersReducedMotion ||
-      Math.abs(
-        targetHeight -
-          startHeight,
-      ) < 0.5
-    ) {
-      rink.style.height = "auto";
-
-      rink.style.removeProperty(
-        "will-change",
-      );
-
-      rink.classList.remove(
-        "rinkcards-rink--measuring",
-      );
-
-      return undefined;
-    }
-
-    /*
-     * Explicit px → px animation.
-     *
-     * Unlike the old CSS transition approach, this does not
-     * depend on two separate browser style frames being
-     * recognized correctly. The browser receives the complete
-     * animation in one command.
-     */
-    const heightAnimation =
-      rink.animate(
-        [
-          {
-            height:
-              `${startHeight}px`,
-          },
-          {
-            height:
-              `${targetHeight}px`,
-          },
-        ],
-        {
-          duration:
-            RINK_RESIZE_DURATION,
-          easing:
-            RINK_RESIZE_EASING,
-          fill: "forwards",
-        },
-      );
-
-    rinkHeightAnimationRef.current =
-      heightAnimation;
-
-    const finishResize = () => {
-      /*
-       * Ignore an old animation if it was replaced by a
-       * newer Programs / Go Back interaction.
-       */
-      if (
-        rinkHeightAnimationRef.current !==
-        heightAnimation
-      ) {
-        return;
-      }
-
-      /*
-       * First establish the final pixel height underneath the
-       * Web Animation. Then cancel the finished animation.
-       */
-      rink.style.height =
-        `${targetHeight}px`;
-
-      heightAnimation.cancel();
-
-      rinkHeightAnimationRef.current =
-        null;
-
-      /*
-       * With the measuring class still applied, release the
-       * rink back to natural responsive height. Because the
-       * computed height is already the same target size, this
-       * produces no visible jump.
-       */
-      rink.style.height = "auto";
-
-      rink.style.removeProperty(
-        "will-change",
-      );
-
-      rink.classList.remove(
-        "rinkcards-rink--measuring",
-      );
-    };
-
-    heightAnimation.addEventListener(
-      "finish",
-      finishResize,
-      {
-        once: true,
-      },
-    );
-
-    return () => {
-      heightAnimation.removeEventListener(
-        "finish",
-        finishResize,
-      );
-
-      /*
-       * Normally a new click will already have frozen the
-       * current rendered height and cancelled the animation
-       * inside handleProgramsToggle().
-       *
-       * This branch mainly protects component teardown or
-       * an unexpected state change.
-       */
-      if (
-        rinkHeightAnimationRef.current ===
-        heightAnimation
-      ) {
-        heightAnimation.cancel();
-
-        rinkHeightAnimationRef.current =
-          null;
-      }
-    };
-  }, [showPrograms]);
-
-  /*
-   * Final cleanup if this section ever unmounts while a
-   * height animation is still active.
-   */
-  useEffect(() => {
-    return () => {
-      if (
-        rinkHeightAnimationRef.current
-      ) {
-        rinkHeightAnimationRef.current.cancel();
-
-        rinkHeightAnimationRef.current =
-          null;
-      }
-    };
-  }, []);
-
-  const programsToggleCard =
-    showPrograms
-      ? {
-          ...navigationLinks[0],
-          title: "Go Back",
-          description:
-            "Return to Rinkside Guide",
-        }
-      : navigationLinks[0];
-
-  const surroundingLinks =
-    showPrograms
-      ? programLinks
-      : navigationLinks.slice(1);
-
   return (
     <section
       ref={sectionRef}
       className="rinkcards-section"
-      aria-labelledby="rinkcards-section-title"
+      aria-label="Around the Rink"
       style={{
         backgroundImage:
           `radial-gradient(
@@ -1303,14 +937,6 @@ function RinkCardsSection() {
       />
 
       <div className="rinkcards-section__inner">
-        <header className="rinkcards-heading">
-          <h1 id="rinkcards-section-title">
-            Rinkside Guide
-          </h1>
-
-          <span aria-hidden="true" />
-        </header>
-
         <div className="rinkcards-rink-wrap">
           <img
             className="rinkcards-scoreboard"
@@ -1319,75 +945,32 @@ function RinkCardsSection() {
             aria-hidden="true"
           />
 
-          <div
-            ref={rinkRef}
-            className="rinkcards-rink"
-          >
+          <div className="rinkcards-rink">
             <RinkMarkings />
 
             <nav
-              className={
-                `rinkcards-grid ${
-                  showPrograms
-                    ? "rinkcards-grid--programs"
-                    : "rinkcards-grid--guide"
-                }`
-              }
-              aria-label={
-                showPrograms
-                  ? "Greenwich Skating Club programs"
-                  : "Greenwich Skating Club pages"
-              }
+              className="rinkcards-grid rinkcards-grid--programs"
+              aria-label="Greenwich Skating Club programs"
             >
               <RinkCard
-                link={programsToggleCard}
-                onClick={
-                  handleProgramsToggle
-                }
+                link={PROGRAMS_HEADER_CARD}
                 animationIndex={0}
-                arrowDirection={
-                  showPrograms
-                    ? "left"
-                    : "right"
-                }
-                isPressed={showPrograms}
-                shouldAnimate={
-                  hasEnteredViewport &&
-                  !showPrograms
-                }
+                shouldAnimate={hasEnteredViewport}
               />
 
-              {surroundingLinks.map(
+              {programLinks.map(
                 (link, index) => (
                   <RinkCard
-                    key={
-                      `${
-                        showPrograms
-                          ? "program"
-                          : "guide"
-                      }-${link.title}`
-                    }
+                    key={link.title}
                     link={link}
                     animationIndex={
                       index + 1
                     }
-                    shouldAnimate={
-                      showPrograms ||
-                      hasEnteredViewport
-                    }
+                    shouldAnimate={hasEnteredViewport}
                   />
                 ),
               )}
             </nav>
-
-            <span
-              className="sr-only"
-              aria-live="polite"
-            >
-              {showPrograms
-                ? "Program cards are now displayed."
-                : "Rinkside Guide cards are now displayed."}
-            </span>
           </div>
         </div>
       </div>
@@ -1421,17 +1004,6 @@ function EmailIcon() {
       />
 
       <path d="m4 7 8 6 8-6" />
-    </svg>
-  );
-}
-
-function PhoneIcon() {
-  return (
-    <svg
-      viewBox="0 0 24 24"
-      aria-hidden="true"
-    >
-      <path d="M6.6 10.8c1.4 2.8 3.8 5.2 6.6 6.6l2.2-2.2c.3-.3.7-.4 1.1-.3 1.2.4 2.5.6 3.8.6.6 0 1 .4 1 1v3.6c0 .6-.4 1-1 1C10.6 21.1 2.9 13.4 2.9 3.7c0-.6.4-1 1-1h3.6c.6 0 1 .4 1 1 0 1.3.2 2.6.6 3.8.1.4 0 .8-.3 1.1L6.6 10.8Z" />
     </svg>
   );
 }
@@ -1668,7 +1240,7 @@ function ConnectPanel() {
             <PinIcon />
 
             <span>
-              15 Cardinal Road · Greenwich, CT 06830
+              9 Cardinal Road · Greenwich, CT 06830
             </span>
           </a>
 
@@ -1677,19 +1249,6 @@ function ConnectPanel() {
 
             <span>
               {ADMISSIONS_EMAIL}
-            </span>
-          </a>
-
-          <a
-            href={`tel:${GSC_PHONE_NUMBER.replace(
-              /[^\d+]/g,
-              "",
-            )}`}
-          >
-            <PhoneIcon />
-
-            <span>
-              Phone: {GSC_PHONE_NUMBER}
             </span>
           </a>
         </div>

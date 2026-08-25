@@ -10,33 +10,9 @@
 }
 
 @font-face {
-  font-family: "Oswald";
-  src: url("./fonts/Oswald-ExtraLight.ttf") format("truetype");
-  font-weight: 200;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Oswald";
-  src: url("./fonts/Oswald-Regular.ttf") format("truetype");
+  font-family: "ArtBrush Medium";
+  src: url("./fonts/artBrushMed.ttf") format("truetype");
   font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Oswald";
-  src: url("./fonts/Oswald-SemiBold.ttf") format("truetype");
-  font-weight: 600;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Oswald";
-  src: url("./fonts/Oswald-Bold.ttf") format("truetype");
-  font-weight: 700;
   font-style: normal;
   font-display: swap;
 }
@@ -122,44 +98,6 @@
   pointer-events: none;
 }
 
-.rinkcards-heading {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-
-  margin: 0 0 clamp(22px, 2.4vw, 34px);
-
-  text-align: center;
-}
-
-.rinkcards-heading h1 {
-  margin: 0;
-
-  color: #ffffff;
-
-  font-family: "Oswald", sans-serif;
-  font-size: clamp(2.3rem, 3.6vw, 4.1rem);
-  font-weight: 600;
-  letter-spacing: 0.055em;
-  line-height: 0.98;
-  text-transform: uppercase;
-
-  text-shadow: 0 8px 22px rgba(0, 0, 0, 0.24);
-}
-
-.rinkcards-heading>span {
-  width: 160px;
-  height: 2px;
-
-  margin-top: clamp(22px, 2.4vw, 34px);
-
-  background: linear-gradient(90deg,
-      transparent 0%,
-      var(--gsc-red) 18%,
-      var(--gsc-red) 82%,
-      transparent 100%);
-}
-
 .rinkcards-rink {
   position: relative;
   isolation: isolate;
@@ -169,7 +107,7 @@
   min-width: 0;
 
   padding:
-    clamp(40px, 4.3vw, 64px) clamp(56px, 5.6vw, 94px);
+    clamp(40px, 4.3vw, 64px) clamp(70px, 6.5vw, 110px);
 
   overflow: hidden;
 
@@ -449,8 +387,10 @@
 
 /*
  * Rink orientation:
- * - 1000px and wider: normal landscape rink markings
- * - 999px and narrower: portrait rink markings with HORIZONTAL lines
+ * - 1181px and wider: normal landscape rink markings
+ * - 1180px and narrower: portrait rink markings with HORIZONTAL lines.
+ *   This matches the grid breakpoint where the rink shape itself switches
+ *   from wide to tall, so the markings always match the container shape.
  */
 .rinkcards-rink__markings--landscape {
   display: block;
@@ -460,7 +400,7 @@
   display: none;
 }
 
-@media (max-width: 999px) {
+@media (max-width: 1180px) {
   .rinkcards-rink__markings--landscape {
     display: none;
   }
@@ -471,6 +411,13 @@
 
   .rinkcards-rink__markings--portrait {
     display: block;
+  }
+
+  .rinkcards-scoreboard {
+    top: calc(100% - 17px);
+    left: 50%;
+
+    transform: translateX(-50%) rotate(90deg);
   }
 }
 
@@ -521,122 +468,34 @@
     border-color 220ms ease;
 }
 
-.rink-card--crossbar {
-  grid-column: 1 / span 4;
-  grid-row: 1 / span 2;
-
-  min-height: clamp(380px, 29vw, 480px);
-}
-
-.rink-card--billing {
-  grid-column: 5 / span 4;
-  grid-row: 1;
-}
-
-.rink-card--membership {
-  grid-column: 9 / span 4;
-  grid-row: 1;
-}
-
-.rink-card--contact {
-  grid-column: 5 / span 4;
-  grid-row: 2;
-}
-
-.rink-card--programs {
-  grid-column: 9 / span 2;
-  grid-row: 2;
-}
-
-.rink-card--directions {
-  grid-column: 11 / span 2;
-  grid-row: 2;
-}
-
 .rinkcards-grid--programs {
-  grid-template-rows: repeat(3, minmax(138px, 1fr));
+  grid-template-rows: auto repeat(2, minmax(138px, 1fr));
   grid-auto-flow: row dense;
 }
 
 .rinkcards-grid--programs .rink-card--crossbar {
-  grid-column: 1 / span 4;
-  grid-row: 1 / span 3;
+  grid-column: 1 / -1;
+  grid-row: 1;
 
-  min-height: clamp(500px, 34vw, 590px);
+  min-height: clamp(140px, 11vw, 190px);
 }
 
 .rink-card--program-item {
   grid-column: span 4;
   grid-row: auto;
 
-  min-height: clamp(154px, 12vw, 188px);
-}
-
-.rink-card--button {
-  width: 100%;
-  padding: 0;
-
-  font: inherit;
-
-  cursor: pointer;
-}
-
-.rink-card--toggle-active {
-  border-color: rgba(229, 24, 55, 0.62);
-
-  animation: rinkToggleActivate 620ms cubic-bezier(0.22, 0.74, 0.28, 1);
-}
-
-.rink-card--toggle-active .rink-card__rule {
-  background: var(--gsc-red);
-}
-
-.rink-card--crossbar.rink-card--toggle-active .rink-card__title {
-  font-size: clamp(2.35rem, 2.83vw, 3.6rem);
-  white-space: nowrap;
-}
-
-@media (min-width: 1181px) {
-  .rink-card--toggle-active .rink-card__description {
-    margin-top: 4px;
-  }
-}
-
-.rink-card--toggle-active .rink-card__title-row {
-  flex-direction: column-reverse;
-  align-items: center;
-
-  gap: clamp(6px, 0.6vw, 10px);
-}
-
-.rink-card--toggle-active .rink-card__arrow--inline {
-  transform: translateX(-50px);
-}
-
-.rink-card--crossbar.rink-card--toggle-active:hover .rink-card__arrow--inline {
-  transform: translateX(-56px);
-}
-
-.rink-card--toggle-active .rink-card__arrow {
-  width: clamp(56px, 4vw, 76px);
-  height: clamp(56px, 4vw, 76px);
-}
-
-@keyframes rinkToggleActivate {
-  0% {
-    opacity: 0.82;
-    transform: scale(0.985);
-  }
-
-  100% {
-    opacity: 1;
-    transform: scale(1);
-  }
+  min-height: clamp(175px, 14vw, 215px);
 }
 
 .rink-card--program-item .rink-card__title {
   font-size: clamp(1.15rem, 1.25vw, 1.65rem);
   line-height: 1.02;
+}
+
+@media (min-width: 1181px) {
+  .rink-card--program-item.rink-card--wide-arrow-gap .rink-card__title {
+    font-size: clamp(0.95rem, 1.05vw, 1.35rem);
+  }
 }
 
 .rink-card--program-item .rink-card__rule {
@@ -697,14 +556,14 @@
 }
 
 .rink-card--crossbar .rink-card__content {
+  top: 0;
+  align-items: center;
+  justify-content: center;
+
   padding:
     clamp(26px, 2.2vw, 34px) clamp(26px, 2.2vw, 34px);
-}
 
-.rink-card--programs .rink-card__content,
-.rink-card--directions .rink-card__content {
-  padding:
-    clamp(16px, 1.2vw, 19px) clamp(14px, 1.15vw, 17px);
+  text-align: center;
 }
 
 .rink-card__title-row {
@@ -721,9 +580,9 @@
 
   color: #ffffff;
 
-  font-family: "Oswald", sans-serif;
+  font-family: "ArtBrush Medium", sans-serif;
   font-size: clamp(1.6rem, 1.7vw, 2.2rem);
-  font-weight: 600;
+  font-weight: 400;
   letter-spacing: 0.035em;
   line-height: 0.98;
   text-transform: uppercase;
@@ -734,16 +593,7 @@
 }
 
 .rink-card--crossbar .rink-card__title {
-  font-size: clamp(2.1rem, 2.35vw, 3rem);
-}
-
-.rink-card--programs .rink-card__title,
-.rink-card--directions .rink-card__title {
-  overflow: hidden;
-
-  font-size: clamp(1.2rem, 1.1vw, 1.4rem);
-  white-space: nowrap;
-  text-overflow: ellipsis;
+  font-size: clamp(2.6rem, 2.9vw, 3.7rem);
 }
 
 .rink-card__arrow {
@@ -780,6 +630,21 @@
   object-fit: contain;
 }
 
+.rink-card__title-divider {
+  flex-shrink: 0;
+
+  width: 120px;
+  height: 2px;
+
+  margin-top: clamp(14px, 1.2vw, 18px);
+
+  background: linear-gradient(90deg,
+      transparent 0%,
+      var(--gsc-red) 18%,
+      var(--gsc-red) 82%,
+      transparent 100%);
+}
+
 .rink-card__description {
   max-width: 94%;
 
@@ -787,20 +652,12 @@
 
   color: rgba(255, 255, 255, 0.9);
 
-  font-family: "Oswald", sans-serif;
-  font-size: clamp(0.85rem, 0.78vw, 1rem);
-  font-weight: 200;
+  font-family: "ArtBrush Medium", sans-serif;
+  font-size: clamp(1.15rem, 1vw, 1.35rem);
+  font-weight: 400;
   line-height: 1.55;
 
   text-shadow: 0 2px 8px rgba(0, 0, 0, 0.62);
-}
-
-.rink-card--programs .rink-card__description,
-.rink-card--directions .rink-card__description {
-  max-width: 100%;
-  min-height: 3.1em;
-
-  font-size: clamp(0.76rem, 0.66vw, 0.84rem);
 }
 
 .rink-card__rule {
@@ -813,12 +670,8 @@
   background: rgba(255, 255, 255, 0.36);
 }
 
-@media (min-width: 521px) {
-
-  .rink-card--programs .rink-card__rule,
-  .rink-card--directions .rink-card__rule {
-    margin-top: 6px;
-  }
+.rink-card--crossbar .rink-card__rule {
+  display: none;
 }
 
 .rink-card:hover {
@@ -891,8 +744,9 @@
   }
 
   .rinkcards-rink {
+    /* Extra end-zone room so the portrait nets and creases remain visible. */
     padding:
-      clamp(40px, 4vw, 54px) clamp(42px, 5vw, 66px);
+      clamp(72px, 7vw, 96px) clamp(42px, 5vw, 66px);
 
     border-radius: clamp(58px, 8vw, 104px);
   }
@@ -901,14 +755,12 @@
     grid-template-columns: repeat(2, minmax(0, 1fr));
     grid-template-rows: none;
     grid-auto-rows: minmax(230px, auto);
+
+    max-width: 90%;
+    margin: 0 auto;
   }
 
   .rink-card--crossbar,
-  .rink-card--billing,
-  .rink-card--membership,
-  .rink-card--contact,
-  .rink-card--programs,
-  .rink-card--directions,
   .rink-card--program-item {
     grid-column: auto;
     grid-row: auto;
@@ -919,16 +771,9 @@
     min-height: 230px;
   }
 
-  .rink-card--programs .rink-card__title,
-  .rink-card--directions .rink-card__title,
   .rink-card--program-item .rink-card__title {
     font-size: clamp(1.65rem, 3vw, 2.4rem);
     white-space: normal;
-  }
-
-  .rink-card--programs .rink-card__description,
-  .rink-card--directions .rink-card__description {
-    font-size: clamp(0.85rem, 1.4vw, 1.04rem);
   }
 
   .rinkcards-grid--programs {
@@ -963,14 +808,10 @@
       clamp(62px, 11vw, 86px) 14px clamp(76px, 12vw, 100px);
   }
 
-  .rinkcards-heading h1 {
-    font-size: clamp(2.2rem, 8vw, 3.35rem);
-  }
-
   .rinkcards-rink {
     /* Extra end-zone room so the portrait nets and creases remain visible. */
     padding:
-      clamp(56px, 9vw, 68px) clamp(22px, 5vw, 34px);
+      clamp(70px, 10vw, 84px) clamp(22px, 5vw, 34px);
 
     border-radius: clamp(46px, 10vw, 76px);
   }
@@ -981,37 +822,30 @@
   }
 
   .rink-card--crossbar,
-  .rink-card--billing,
-  .rink-card--membership,
-  .rink-card--contact,
-  .rink-card--programs,
-  .rink-card--directions,
   .rink-card--program-item {
     min-height: 205px;
   }
 
   .rink-card__content,
   .rink-card--crossbar .rink-card__content,
-  .rink-card--programs .rink-card__content,
-  .rink-card--directions .rink-card__content,
   .rink-card--program-item .rink-card__content {
     padding: 18px;
   }
 
   .rink-card__title,
   .rink-card--crossbar .rink-card__title,
-  .rink-card--programs .rink-card__title,
-  .rink-card--directions .rink-card__title,
   .rink-card--program-item .rink-card__title {
     font-size: clamp(1.35rem, 4.3vw, 2rem);
   }
 
-  .rink-card__description,
-  .rink-card--programs .rink-card__description,
-  .rink-card--directions .rink-card__description {
+  .rink-card--crossbar .rink-card__title {
+    font-size: clamp(1.7rem, 5vw, 2.5rem);
+  }
+
+  .rink-card__description {
     max-width: 100%;
 
-    font-size: clamp(0.78rem, 2vw, 0.94rem);
+    font-size: clamp(1.05rem, 2.6vw, 1.25rem);
   }
 
   .rink-card__rule {
@@ -1038,25 +872,10 @@
     display: none;
   }
 
-  .rink-card--toggle-active .rink-card__content {
-    transform: translate(20px, -15px);
-  }
-
-  .rink-card--toggle-active .rink-card__arrow--inline {
-    transform: translateX(5px);
-  }
-
-  .rinkcards-heading h1 {
-    font-size: clamp(2rem, 10vw, 2.9rem);
-  }
-
-  .rinkcards-heading>span {
-    height: 2px;
-  }
-
   .rinkcards-rink {
+    /* Extra end-zone room so the portrait nets and creases remain visible. */
     padding:
-      clamp(58px, 15vw, 72px) 16px;
+      clamp(70px, 16vw, 86px) 16px;
 
     border-radius: clamp(38px, 13vw, 58px);
   }
@@ -1066,6 +885,9 @@
     grid-auto-rows: auto;
 
     gap: 7px;
+
+    max-width: none;
+    margin: 0;
   }
 
   .rink-card {
@@ -1073,36 +895,41 @@
   }
 
   .rink-card--crossbar,
-  .rink-card--billing,
-  .rink-card--membership,
-  .rink-card--contact,
-  .rink-card--programs,
-  .rink-card--directions,
   .rink-card--program-item {
     min-height: clamp(148px, 43vw, 186px);
   }
 
   .rink-card__content,
   .rink-card--crossbar .rink-card__content,
-  .rink-card--programs .rink-card__content,
-  .rink-card--directions .rink-card__content,
   .rink-card--program-item .rink-card__content {
     padding: 14px;
     bottom: 10px;
   }
 
+  .rink-card--crossbar .rink-card__content {
+    bottom: 0;
+  }
+
   .rink-card__title,
   .rink-card--crossbar .rink-card__title,
-  .rink-card--programs .rink-card__title,
-  .rink-card--directions .rink-card__title,
   .rink-card--program-item .rink-card__title {
     font-size: clamp(1.02rem, 5vw, 1.48rem);
     font-weight: 700;
     line-height: 1.02;
   }
 
+  .rink-card--crossbar .rink-card__title {
+    font-size: clamp(1.6rem, 7vw, 2.2rem);
+  }
+
   .rink-card__description {
-    display: none;
+    max-width: 100%;
+
+    font-size: clamp(0.8rem, 3.2vw, 0.95rem);
+  }
+
+  .rink-card__title-divider {
+    width: 90px;
   }
 
   .rink-card__rule {
@@ -1110,14 +937,10 @@
     margin-top: 10px;
   }
 
-  .rink-card--toggle-active .rink-card__rule {
-    width: 110px;
-  }
-
   .rinkcards-grid--programs .rink-card--crossbar {
     grid-column: 1 / -1;
 
-    min-height: clamp(165px, 46vw, 210px);
+    min-height: clamp(142px, 38vw, 175px);
   }
 
   .rinkcards-grid--programs .rink-card--program-item {
@@ -1190,8 +1013,7 @@
   .rinkcards-rink__goal-line,
   .rinkcards-rink__center-line,
   .rinkcards-rink__blue-line,
-  .rinkcards-rink__circle,
-  .rinkcards-rink__crease {
+  .rinkcards-rink__circle {
     opacity: 0.11;
   }
 
@@ -1222,29 +1044,24 @@
   }
 
   .rink-card--crossbar,
-  .rink-card--billing,
-  .rink-card--membership,
-  .rink-card--contact,
-  .rink-card--programs,
-  .rink-card--directions,
   .rink-card--program-item {
     min-height: 142px;
   }
 
   .rink-card__content,
   .rink-card--crossbar .rink-card__content,
-  .rink-card--programs .rink-card__content,
-  .rink-card--directions .rink-card__content,
   .rink-card--program-item .rink-card__content {
     padding: 12px;
   }
 
   .rink-card__title,
   .rink-card--crossbar .rink-card__title,
-  .rink-card--programs .rink-card__title,
-  .rink-card--directions .rink-card__title,
   .rink-card--program-item .rink-card__title {
     font-size: 1rem;
+  }
+
+  .rink-card--crossbar .rink-card__title {
+    font-size: 1.25rem;
   }
 
   .rinkcards-grid--programs .rink-card--crossbar {
@@ -1269,7 +1086,6 @@
     transition: none;
   }
 
-  .rink-card--toggle-active,
   .rink-card--entrance {
     animation: none;
   }
