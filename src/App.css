@@ -1549,6 +1549,18 @@
   background: transparent;
 }
 
+.member-button--outline {
+  color: var(--footer-red);
+
+  background: transparent;
+}
+
+.member-button--outline:hover {
+  color: var(--footer-white);
+
+  background: var(--footer-red);
+}
+
 .instagram-link {
   display: inline-flex;
   align-items: center;

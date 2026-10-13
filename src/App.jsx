@@ -1237,7 +1237,7 @@ function ConnectPanel() {
           </a>
 
           <a
-            className="member-button"
+            className="member-button member-button--outline"
             href={MEMBERS_SITE_URL}
             target="_blank"
             rel="noreferrer"
