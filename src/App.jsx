@@ -1230,7 +1230,7 @@ function ConnectPanel() {
             rel="noreferrer"
           >
             <span>
-              Member Login
+              Crossbar
             </span>
 
             <ArrowIcon />
@@ -1243,7 +1243,7 @@ function ConnectPanel() {
             rel="noreferrer"
           >
             <span>
-              Member Portal
+              Member Billing
             </span>
 
             <ArrowIcon />
