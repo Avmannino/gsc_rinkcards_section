@@ -7,7 +7,7 @@ import "./App.css";
 import SiteFooter from "./Footer";
 
 const SITE_BASE_URL =
-  "https://wingsarenact.wixstudio.com/gscnewsite";
+  "https://www.greenwichskatingclub.com";
 
 const CENTER_ICE_LOGO_SRC =
   `${import.meta.env.BASE_URL}gsc-logo.png`;
