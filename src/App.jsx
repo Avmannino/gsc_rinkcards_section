@@ -11,8 +11,8 @@ const SITE_BASE_URL =
 const MEMBER_LOGIN_URL =
   "https://www.greenwichskatingclub.org/login";
 
-const ADMISSIONS_EMAIL =
-  "gscadmissions@greenwichskatingclub.org";
+const MEMBERS_SITE_URL =
+  "https://members.greenwichskatingclub.org";
 
 const CENTER_ICE_LOGO_SRC =
   `${import.meta.env.BASE_URL}gsc-logo.png`;
@@ -989,24 +989,6 @@ function ArrowIcon() {
   );
 }
 
-function EmailIcon() {
-  return (
-    <svg
-      viewBox="0 0 24 24"
-      aria-hidden="true"
-    >
-      <rect
-        x="3"
-        y="5"
-        width="18"
-        height="14"
-        rx="2"
-      />
-
-      <path d="m4 7 8 6 8-6" />
-    </svg>
-  );
-}
 
 function PinIcon() {
   return (
@@ -1227,11 +1209,6 @@ function ConnectPanel() {
           Connect
         </h2>
 
-        <p>
-          Questions about joining Greenwich Skating
-          Club or visiting the rink?
-        </p>
-
         <div className="footer-connect__details">
           <a
             href={`${SITE_BASE_URL}/directions`}
@@ -1243,28 +1220,35 @@ function ConnectPanel() {
               9 Cardinal Road · Greenwich, CT 06830
             </span>
           </a>
-
-          <a href={`mailto:${ADMISSIONS_EMAIL}`}>
-            <EmailIcon />
-
-            <span>
-              {ADMISSIONS_EMAIL}
-            </span>
-          </a>
         </div>
 
-        <a
-          className="member-button"
-          href={MEMBER_LOGIN_URL}
-          target="_blank"
-          rel="noreferrer"
-        >
-          <span>
-            Member Login
-          </span>
+        <div className="footer-connect__buttons">
+          <a
+            className="member-button"
+            href={MEMBER_LOGIN_URL}
+            target="_blank"
+            rel="noreferrer"
+          >
+            <span>
+              Member Login
+            </span>
 
-          <ArrowIcon />
-        </a>
+            <ArrowIcon />
+          </a>
+
+          <a
+            className="member-button"
+            href={MEMBERS_SITE_URL}
+            target="_blank"
+            rel="noreferrer"
+          >
+            <span>
+              Member Portal
+            </span>
+
+            <ArrowIcon />
+          </a>
+        </div>
 
         <a
           className="instagram-link"
