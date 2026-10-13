@@ -1458,10 +1458,13 @@
 }
 
 .footer-connect__buttons {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-auto-columns: 1fr;
+  grid-auto-flow: column;
 
   gap: 12px;
+
+  width: fit-content;
 
   margin-top: 25px;
 }
@@ -1511,7 +1514,6 @@
 
   gap: 15px;
 
-  width: fit-content;
   min-width: 210px;
   min-height: 50px;
 
@@ -1816,8 +1818,10 @@
   }
 
   .footer-connect__buttons {
-    flex-direction: column;
-    align-items: center;
+    grid-auto-flow: row;
+
+    margin-left: auto;
+    margin-right: auto;
   }
 
   .site-footer__bottom-inner {
